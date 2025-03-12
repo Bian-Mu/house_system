@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { Checkbox, Divider } from 'antd';
 import type { CheckboxProps } from 'antd';
 
+import "./SubjectMatter.css"
+
 const CheckboxGroup = Checkbox.Group;
 
 const plainOptions = ['Apple', 'Pear', 'Orange'];
-const defaultCheckedList = ['Apple', 'Orange'];
 
-const App: React.FC = () => {
-    const [checkedList, setCheckedList] = useState<string[]>(defaultCheckedList);
+const SubjectMatter: React.FC = () => {
+    const [checkedList, setCheckedList] = useState<string[]>([]);
 
     const checkAll = plainOptions.length === checkedList.length;
     const indeterminate = checkedList.length > 0 && checkedList.length < plainOptions.length;
@@ -22,14 +23,14 @@ const App: React.FC = () => {
     };
 
     return (
-        <>
+        <div id="subjectmatter-select">
+            <span>标的物类型：</span>
             <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
-                Check all
+                不限
             </Checkbox>
-            <Divider />
             <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChange} />
-        </>
+        </div>
     );
 };
 
-export default App;
+export default SubjectMatter;

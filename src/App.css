@@ -1,0 +1,15 @@
+#all-select {
+    width: 1200px;
+    height: 400px;
+    position: absolute;
+    top: 50px;
+    left: 400px;
+}
+
+#house-show {
+    width: 1200px;
+    height: 800px;
+    position: absolute;
+    top: 450px;
+    left: 400px;
+}

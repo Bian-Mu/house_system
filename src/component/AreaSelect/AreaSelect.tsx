@@ -19,7 +19,10 @@ const onChange: CascaderProps<Option>['onChange'] = (value) => {
 };
 
 const AreaSelect: React.FC = () => (
-    <Cascader options={options} onChange={onChange} size='large' />
+    <div>
+        <span>地区：</span>
+        <Cascader options={options} onChange={onChange} size='large' id="area-select" />
+    </div>
 );
 
 export default AreaSelect;
