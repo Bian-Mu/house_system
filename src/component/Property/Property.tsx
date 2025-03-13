@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Checkbox, Divider } from 'antd';
 import type { CheckboxProps } from 'antd';
 
-import "./SubjectMatter.css"
+import "./Property.css"
 
 const CheckboxGroup = Checkbox.Group;
 
-const plainOptions = ['住房用地', '商业用地', '工业用地', '其他用地'];
+const plainOptions = ['涉刑资产', '诉讼资产', '破产资产', '自行处置'];
 
-const SubjectMatter: React.FC = () => {
+const Property: React.FC = () => {
     const [checkedList, setCheckedList] = useState<string[]>([]);
 
     const checkAll = plainOptions.length === checkedList.length;
@@ -23,8 +23,8 @@ const SubjectMatter: React.FC = () => {
     };
 
     return (
-        <div id="subjectmatter-select">
-            <span className='select-type'>标的物类型</span>
+        <div id="property-select">
+            <span className='select-type'>资产类型</span>
             <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
                 不限
             </Checkbox>
@@ -33,4 +33,4 @@ const SubjectMatter: React.FC = () => {
     );
 };
 
-export default SubjectMatter;
+export default Property;

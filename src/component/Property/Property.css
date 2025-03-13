@@ -1,0 +1,7 @@
+#property-select label span {
+    font-size: 16px;
+}
+
+#property-select label {
+    margin-right: 15px;
+}

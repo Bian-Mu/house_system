@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Checkbox, Divider } from 'antd';
 import type { CheckboxProps } from 'antd';
 
-import "./SubjectMatter.css"
+import "./Auction.css"
 
 const CheckboxGroup = Checkbox.Group;
 
-const plainOptions = ['住房用地', '商业用地', '工业用地', '其他用地'];
+const plainOptions = ['正在进行', '即将开始', '已结束', '中止', '撤回'];
 
-const SubjectMatter: React.FC = () => {
+const Auction: React.FC = () => {
     const [checkedList, setCheckedList] = useState<string[]>([]);
 
     const checkAll = plainOptions.length === checkedList.length;
@@ -23,8 +23,8 @@ const SubjectMatter: React.FC = () => {
     };
 
     return (
-        <div id="subjectmatter-select">
-            <span className='select-type'>标的物类型</span>
+        <div id="auction-select">
+            <span className='select-type'>拍卖状态</span>
             <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
                 不限
             </Checkbox>
@@ -33,4 +33,4 @@ const SubjectMatter: React.FC = () => {
     );
 };
 
-export default SubjectMatter;
+export default Auction;

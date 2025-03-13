@@ -1,15 +1,39 @@
 #all-select {
-    width: 1200px;
-    height: 400px;
+    width: 1000px;
+    height: 300px;
     position: absolute;
-    top: 50px;
-    left: 400px;
+    top: 20px;
+    left: 500px;
+    border: 1px solid rgb(213, 213, 213);
+    border-radius: 10px;
+    padding-top: 30px;
+}
+
+#sort {
+    padding-top: 20px;
 }
 
 #house-show {
-    width: 1200px;
+    width: 1000px;
     height: 800px;
+    top: 380px;
+    left: 500px;
     position: absolute;
-    top: 450px;
-    left: 400px;
+    border: 1px solid rgb(213, 213, 213);
+    border-radius: 10px;
+}
+
+#house-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
+}
+
+.select-type {
+    display: inline-block;
+    color: rgb(56, 56, 56);
+    width: 200px;
+    text-align: center;
 }

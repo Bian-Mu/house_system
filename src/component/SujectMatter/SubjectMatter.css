@@ -1,3 +1,7 @@
 #subjectmatter-select label span {
     font-size: 16px;
 }
+
+#subjectmatter-select label {
+    margin-right: 15px;
+}
