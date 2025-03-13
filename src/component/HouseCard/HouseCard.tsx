@@ -10,7 +10,7 @@ const HouseCard: React.FC = () => (
         style={{ width: 200 }}
         cover={<img alt="example" src={House} />}
     >
-        <Meta title="xx市xx区xxx街道" description="售价" />
+        <Meta title="xx市xx区xxx街道" description="售价:xx万元" />
     </Card>
 );
 

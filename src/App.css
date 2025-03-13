@@ -3,7 +3,8 @@
     height: 300px;
     position: absolute;
     top: 20px;
-    left: 500px;
+    left: 50%;
+    transform: translate(-50%, 0);
     border: 1px solid rgb(213, 213, 213);
     border-radius: 10px;
     padding-top: 30px;
@@ -17,7 +18,8 @@
     width: 1000px;
     height: 800px;
     top: 380px;
-    left: 500px;
+    left: 50%;
+    transform: translate(-50%, 0);
     position: absolute;
     border: 1px solid rgb(213, 213, 213);
     border-radius: 10px;
