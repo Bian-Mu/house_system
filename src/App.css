@@ -16,8 +16,8 @@
 
 #house-show {
     width: 1000px;
-    height: 800px;
-    top: 380px;
+    height: 900px;
+    top: 370px;
     left: 50%;
     transform: translate(-50%, 0);
     position: absolute;
@@ -25,17 +25,38 @@
     border-radius: 10px;
 }
 
-#house-cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    align-items: center;
-    justify-items: center;
-}
 
 .select-type {
     display: inline-block;
     color: rgb(56, 56, 56);
     width: 200px;
     text-align: center;
+}
+
+/* 手机端适配 */
+@media (max-width: 768px) {
+    #all-select {
+        width: 85%;
+        height: auto;
+        position: static;
+        transform: none;
+        margin: 2.5%;
+        padding: 5%;
+    }
+
+    #house-show {
+        width: 85%;
+        height: auto;
+        position: static;
+        transform: none;
+        margin: 2.5%;
+        padding: 5%;
+        top: auto;
+    }
+
+
+    .select-type {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }

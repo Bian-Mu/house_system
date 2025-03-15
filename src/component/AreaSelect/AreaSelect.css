@@ -1,3 +1,9 @@
 .ant-cascader {
     width: 500px;
 }
+
+@media (max-width: 768px) {
+    .ant-cascader {
+        width: 90%;
+    }
+}

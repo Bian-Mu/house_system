@@ -1,18 +1,18 @@
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import './App.css'
-import { Divider } from 'antd'
+import { Divider, Pagination } from 'antd'
 import AreaSelect from './component/AreaSelect/AreaSelect'
 import SubjectMatter from './component/SujectMatter/SubjectMatter'
 import Auction from './component/Auction/Auction'
 import Property from './component/Property/Property'
 import Sort from './component/Sort/Sort'
-import HouseCard from './component/HouseCard/HouseCard'
+import HouseList from './component/HouseList/HouseList'
 
 
 function App() {
 
   return (
-    <>
+    <div >
       <div id="all-select">
         <SubjectMatter />
         <Divider />
@@ -28,17 +28,9 @@ function App() {
           <Sort />
           <Divider />
         </div>
-        <div id="house-cards">
-          <HouseCard />
-          <HouseCard />
-          <HouseCard />
-          <HouseCard />
-          <HouseCard />
-          <HouseCard /><HouseCard />
-
-        </div>
+        <HouseList />
       </div>
-    </>
+    </div>
   )
 }
 

@@ -1,0 +1,34 @@
+.single-card {
+    width: 200px;
+}
+
+#house-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
+}
+
+#page-convert {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 850px;
+}
+
+
+@media (max-width: 768px) {
+    .single-card {
+        width: 85%;
+    }
+
+    #house-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #page-convert {
+        position: static;
+        transform: translate(10%, 0);
+    }
+}
