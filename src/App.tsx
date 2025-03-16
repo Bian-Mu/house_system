@@ -1,12 +1,12 @@
-import { Fragment, useState } from 'react'
 import './App.css'
-import { Divider, Pagination } from 'antd'
+import { Divider } from 'antd'
 import AreaSelect from './component/AreaSelect/AreaSelect'
 import SubjectMatter from './component/SujectMatter/SubjectMatter'
 import Auction from './component/Auction/Auction'
 import Property from './component/Property/Property'
 import Sort from './component/Sort/Sort'
 import HouseList from './component/HouseList/HouseList'
+import UploadBox from './component/UploadBox/UploadBox'
 
 
 function App() {

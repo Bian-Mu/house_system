@@ -1,6 +1,7 @@
 import React from 'react';
 import { Select, Space } from 'antd';
 import "./Sort.css"
+import UploadBox from '../UploadBox/UploadBox';
 
 
 const handleChange = (value: string) => {
@@ -31,6 +32,7 @@ const Sort: React.FC = () => (
                 { value: 'up', label: '升序' },
             ]}
         />
+        <UploadBox />
     </Space>
 );
 

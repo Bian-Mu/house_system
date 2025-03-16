@@ -19,7 +19,7 @@ const HouseCard: React.FC = () => (
 
 
 const HouseList = () => {
-    const totalHouses = 50;
+    let totalHouses = 50;
     const housesPerPage = 12;
 
     const [currentPage, setCurrentPage] = useState(1);
