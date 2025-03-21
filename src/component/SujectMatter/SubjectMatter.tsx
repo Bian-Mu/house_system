@@ -6,7 +6,7 @@ import "./SubjectMatter.css"
 
 const CheckboxGroup = Checkbox.Group;
 
-const plainOptions = ['住房用地', '商业用地', '工业用地', '其他用地'];
+const plainOptions = ['住宅用地', '商业用房', '工业用房', '其他用房'];
 
 const SubjectMatter: React.FC = () => {
     const [checkedList, setCheckedList] = useState<string[]>([]);

@@ -7,6 +7,7 @@ import Property from './component/Property/Property'
 import Sort from './component/Sort/Sort'
 import HouseList from './component/HouseList/HouseList'
 import UploadBox from './component/UploadBox/UploadBox'
+import HousePage from './component/HousePage/HousePage'
 
 
 function App() {
@@ -29,6 +30,11 @@ function App() {
           <Divider />
         </div>
         <HouseList />
+      </div>
+
+
+      <div>
+        <HousePage HouseID={"cjdoajffjffffje"} />
       </div>
     </div>
   )

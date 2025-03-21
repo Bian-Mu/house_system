@@ -6,13 +6,30 @@ import "./HouseList.css"
 
 const { Meta } = Card;
 
-const HouseCard: React.FC = () => (
+interface HouseCardShow {
+    HouseCover: string
+    HouseAdress: string
+    HousePrice: number
+}
+
+interface HouseCardProps {
+    H: HouseCardShow
+}
+
+const houseTest: HouseCardShow = {
+    HouseCover: House,
+    HouseAdress: "成都市xxx区xx街道xx小区1幢1单元302室",
+    HousePrice: 123
+}
+
+
+const HouseCard: React.FC<HouseCardProps> = ({ H }) => (
     <Card
         hoverable
         className='single-card'
-        cover={<img alt="example" src={House} />}
+        cover={<img alt="example" src={H.HouseCover} />}
     >
-        <Meta title="xx市xx区xxx街道" description="售价:xx万元" />
+        <Meta title={H.HouseAdress} description={"当前标定价格：" + H.HousePrice + "万元"} />
     </Card>
 );
 
@@ -20,7 +37,7 @@ const HouseCard: React.FC = () => (
 
 const HouseList = () => {
     let totalHouses = 50;
-    const housesPerPage = 12;
+    const housesPerPage = 9;
 
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -33,7 +50,7 @@ const HouseList = () => {
         const endIndex = startIndex + housesPerPage;
         const housesToRender = Array.from({ length: totalHouses })
             .slice(startIndex, endIndex)
-            .map((_, index) => <HouseCard key={startIndex + index} />);
+            .map((_, index) => <HouseCard key={startIndex + index} H={houseTest} />);
 
         return housesToRender;
     };
