@@ -23,15 +23,25 @@ const houseTest: HouseCardShow = {
 }
 
 
-const HouseCard: React.FC<HouseCardProps> = ({ H }) => (
-    <Card
-        hoverable
-        className='single-card'
-        cover={<img alt="example" src={H.HouseCover} />}
-    >
-        <Meta title={H.HouseAdress} description={"当前标定价格：" + H.HousePrice + "万元"} />
-    </Card>
-);
+const HouseCard: React.FC<HouseCardProps> = ({ H }) => {
+    const handleClick = () => {
+        // 打开新标签页并传递数据
+        const data = { message: 'Hello from the main page!' };
+        window.open(`/new-page.html?data=${encodeURIComponent(JSON.stringify(data))}`, '_blank');
+    };
+
+    return (
+        <Card
+            onClick={handleClick}
+            hoverable
+            className='single-card'
+            cover={<img alt="example" src={H.HouseCover} />}
+        >
+            <Meta title={H.HouseAdress} description={"当前标定价格：" + H.HousePrice + "万元"} />
+        </Card>
+    )
+}
+
 
 
 

@@ -32,10 +32,10 @@ function App() {
         <HouseList />
       </div>
 
-
+      {/* 
       <div>
         <HousePage HouseID={"cjdoajffjffffje"} />
-      </div>
+      </div> */}
     </div>
   )
 }
