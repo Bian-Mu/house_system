@@ -27,7 +27,7 @@ const HouseCard: React.FC<HouseCardProps> = ({ H }) => {
     const handleClick = () => {
         // 打开新标签页并传递数据
         const data = { message: 'Hello from the main page!' };
-        window.open(`/new-page.html?data=${encodeURIComponent(JSON.stringify(data))}`, '_blank');
+        window.open(`/houseInfo`, '_blank');
     };
 
     return (

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import HousePage from './component/HousePage/HousePage';
 
 const NewPageApp: React.FC = () => {
     const [message, setMessage] = useState<string>('');
@@ -13,10 +14,20 @@ const NewPageApp: React.FC = () => {
         }
     }, []);
 
+    useEffect(() => {
+        // 设置标签页的 title
+        document.title = 'xxx详情';
+
+        // 可选：在组件卸载时恢复原来的 title
+        return () => {
+            document.title = '房产';
+        };
+    }, []);
+
     return (
         <div>
             <h1>这是新标签页的内容</h1>
-            <p>{message}</p>
+            <HousePage HouseID='dasefasef' />
         </div>
     );
 };
