@@ -3,6 +3,7 @@ import { Button, Modal, Form, Input, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import type { UploadFile, UploadProps } from "antd/es/upload/interface";
 import type { FormInstance } from "antd/es/form";
+import RichModal from "../RichText/RichText";
 
 const UploadBox: React.FC = () => {
     const [form] = Form.useForm<FormInstance>();
@@ -51,6 +52,7 @@ const UploadBox: React.FC = () => {
     const handleUploadChange: UploadProps["onChange"] = ({ fileList }) => {
         setFileList(fileList);
     };
+
 
     return (
         <div id="upload-box">
@@ -109,6 +111,8 @@ const UploadBox: React.FC = () => {
                         </Upload>
                     </Form.Item>
                 </Form>
+                <RichModal />
+
             </Modal>
         </div>
     );

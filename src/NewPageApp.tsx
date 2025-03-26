@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import HousePage from './component/HousePage/HousePage';
+import RichModal from './component/RichText/RichText';
 
 const NewPageApp: React.FC = () => {
     const [message, setMessage] = useState<string>('');
@@ -28,6 +29,7 @@ const NewPageApp: React.FC = () => {
         <div>
             <h1>这是新标签页的内容</h1>
             <HousePage HouseID='dasefasef' />
+            <RichModal />
         </div>
     );
 };
