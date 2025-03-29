@@ -1,0 +1,22 @@
+.ant-modal-wrap {
+    overflow: hidden !important;
+
+}
+
+.ant-modal-content {
+    max-height: 700px !important;
+    overflow-y: auto;
+    border-radius: 0 !important;
+}
+
+.ant-modal-close {
+    display: none;
+}
+
+.four-col-form-item {
+    margin-bottom: 16px;
+}
+
+.four-col-form-item .ant-form-item-label {
+    padding-bottom: 4px;
+}

@@ -3,15 +3,20 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 
-const RichModal: React.FC = () => {
+interface RichModalProps {
+    content: string
+    setContent: Function
+}
+
+const RichModal: React.FC<RichModalProps> = ({ content, setContent }) => {
     const myColors = [
-        "purple",
-        "#785412",
-        "#452632",
-        "#856325",
-        "#963254",
-        "#254563",
-        "white"
+        "white",
+        "grey",
+        "blue",
+        "green",
+        "red",
+        "yellow",
+        "purple"
     ];
     const modules = {
         toolbar: [
@@ -33,7 +38,7 @@ const RichModal: React.FC = () => {
         "strike",
         "blockquote",
         "list",
-        "bullet",
+        "list",
         "link",
         "color",
         "image",
@@ -41,20 +46,17 @@ const RichModal: React.FC = () => {
         "align"
     ];
 
-    const [code, setCode] = useState(
-        "hello guys you can also add fonts and another features to this editor."
-    );
+
     const handleProcedureContentChange = (content: any) => {
-        setCode(content);
+        setContent(content);
     };
     return (
         <>
-            {console.log(code)}
             <ReactQuill
                 theme="snow"
                 modules={modules}
                 formats={formats}
-                value={code}
+                value={content}
                 onChange={handleProcedureContentChange}
             />
         </>
