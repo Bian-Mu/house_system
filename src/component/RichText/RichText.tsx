@@ -1,58 +1,64 @@
-import React, { useState } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import "./RichText.css";
+import React, { useState } from "react";
+import ReactQuill from "react-quill-new";
+import "react-quill-new/dist/quill.snow.css";
 
-interface EditorProps {
-    value: string;
-    onChange: (value: string) => void;
-}
-
-const RichText: React.FC<EditorProps> = ({ value, onChange }) => {
+const RichModal: React.FC = () => {
+    const myColors = [
+        "purple",
+        "#785412",
+        "#452632",
+        "#856325",
+        "#963254",
+        "#254563",
+        "white"
+    ];
     const modules = {
         toolbar: [
-            [{ header: [1, 2, 3, false] }],
-            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-            [{ list: 'ordered' }, { list: 'bullet' }],
-            ['link', 'image'],
-            ['clean']
-        ],
+            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+            ["bold", "italic", "underline", "strike", "blockquote"],
+            [{ align: ["right", "center", "justify"] }],
+            [{ list: "ordered" }, { list: "bullet" }],
+            ["link", "image"],
+            [{ color: myColors }],
+            [{ background: myColors }]
+        ]
     };
 
     const formats = [
-        'header',
-        'bold', 'italic', 'underline', 'strike', 'blockquote',
-        'list', 'bullet',
-        'link', 'image'
+        "header",
+        "bold",
+        "italic",
+        "underline",
+        "strike",
+        "blockquote",
+        "list",
+        "bullet",
+        "link",
+        "color",
+        "image",
+        "background",
+        "align"
     ];
 
-    return (
-        <ReactQuill
-            theme="snow"
-            value={value}
-            onChange={onChange}
-            modules={modules}
-            formats={formats}
-        />
+    const [code, setCode] = useState(
+        "hello guys you can also add fonts and another features to this editor."
     );
-};
-
-const RichModal: React.FC = () => {
-    const [content, setContent] = useState('');
-
-    const handleContentChange = (value: string) => {
-        setContent(value);
+    const handleProcedureContentChange = (content: any) => {
+        setCode(content);
     };
-
     return (
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-            <h1>富文本编辑器</h1>
-            <RichText value={content} onChange={handleContentChange} />
-            <div style={{ marginTop: '20px' }}>
-                <h2>预览:</h2>
-                <div dangerouslySetInnerHTML={{ __html: content }} />
-            </div>
-        </div>
+        <>
+            {console.log(code)}
+            <ReactQuill
+                theme="snow"
+                modules={modules}
+                formats={formats}
+                value={code}
+                onChange={handleProcedureContentChange}
+            />
+        </>
     );
-};
+}
 
 export default RichModal;
