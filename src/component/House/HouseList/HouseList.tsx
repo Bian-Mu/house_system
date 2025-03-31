@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Divider, Pagination } from 'antd';
 
-import House from "../../assets/image.png"
+import House from "../../../assets/image.png"
 import "./HouseList.css"
 
 const { Meta } = Card;

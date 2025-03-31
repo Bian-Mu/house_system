@@ -1,5 +1,5 @@
 import "./RichText.css";
-import React, { useState } from "react";
+import React from "react";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 

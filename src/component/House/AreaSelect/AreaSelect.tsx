@@ -2,7 +2,7 @@ import React from 'react';
 import type { CascaderProps } from 'antd';
 import { Cascader } from 'antd';
 
-import area from "../../assets/newArea.json"
+import area from "../../../assets/newArea.json"
 
 import "./AreaSelect.css"
 

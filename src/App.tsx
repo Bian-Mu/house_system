@@ -1,13 +1,12 @@
 import './App.css'
 import { Divider } from 'antd'
-import AreaSelect from './component/AreaSelect/AreaSelect'
-import SubjectMatter from './component/SujectMatter/SubjectMatter'
-import Auction from './component/Auction/Auction'
-import Property from './component/Property/Property'
-import Sort from './component/Sort/Sort'
-import HouseList from './component/HouseList/HouseList'
+import AreaSelect from './component/House/AreaSelect/AreaSelect'
+import SubjectMatter from './component/House/SujectMatter/SubjectMatter'
+import Auction from './component/House/Auction/Auction'
+import Property from './component/House/Property/Property'
+import Sort from './component/House/Sort/Sort'
+import HouseList from './component/House/HouseList/HouseList'
 import { useState } from 'react'
-import { Button } from 'antd/es/radio'
 
 
 function App() {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import HousePage from './component/HousePage/HousePage';
+import HousePage from './component/House/HousePage/HousePage';
 
-const NewPageApp: React.FC = () => {
+const HouseDetails: React.FC = () => {
     const [message, setMessage] = useState<string>('');
 
     useEffect(() => {
@@ -32,4 +32,4 @@ const NewPageApp: React.FC = () => {
     );
 };
 
-export default NewPageApp;
+export default HouseDetails;

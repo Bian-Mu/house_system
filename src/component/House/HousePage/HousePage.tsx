@@ -1,4 +1,4 @@
-import House from "../../assets/image.png"
+import House from "../../../assets/image.png"
 
 interface HousePageProps {
     HouseID: string
