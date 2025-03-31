@@ -1,7 +1,7 @@
-import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../App";
 import HouseDetails from "../HouseDetails";
+import Login from "../component/Login/Login";
 
 const router = createBrowserRouter([
     {
@@ -10,16 +10,20 @@ const router = createBrowserRouter([
     },
     {
         path: "/login",
-        element: null
+        element: <Login />
     },
     {
         path: "/",
-        element: <App />
+        element: localStorage.getItem('token') ? <App /> : <Navigate to="/login" replace />
     },
     {
         path: "/houseInfo",
-        element: <HouseDetails />
-    }
+        element: localStorage.getItem('token') ? <HouseDetails /> : <Navigate to="/login" replace />
+    },
+    {
+        path: '*',
+        element: <Navigate to="/login" replace />
+    },
 ])
 
 export default router

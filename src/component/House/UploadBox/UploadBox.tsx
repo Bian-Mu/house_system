@@ -124,7 +124,7 @@ const UploadBox: React.FC = () => {
                     {/* 地址 - 单独一行 */}
                     <Form.Item
                         name="address"
-                        label="地址"
+                        label="地址（按照”xx省xx市xx区+详细地址“的格式，例如”四川省成都市金牛区xx小区第5单元302室“）"
                         rules={[{ required: true, message: "请输入地址！" }]}
                     >
                         <Input placeholder="请输入房源地址" />
