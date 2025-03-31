@@ -6,20 +6,40 @@ import Auction from './component/Auction/Auction'
 import Property from './component/Property/Property'
 import Sort from './component/Sort/Sort'
 import HouseList from './component/HouseList/HouseList'
+import { useState } from 'react'
+import { Button } from 'antd/es/radio'
 
 
 function App() {
+  const [searchValue, setSearchValue] = useState<number[][]>([[], [], [], []]);
+
+  const onClick = () => {
+    console.log(searchValue)
+  }
+
+  const updateReturnValue = (index: number) => (value: number[]) => {
+    setSearchValue(prev => {
+      const newValue = [...prev];
+      newValue[index] = value;
+      return newValue;
+    });
+  }
 
   return (
     <div >
       <div id="all-select">
-        <SubjectMatter />
+        <SubjectMatter
+          setReturnValue={updateReturnValue(0)} />
         <Divider />
-        <AreaSelect />
+        <AreaSelect setReturnValue={updateReturnValue(1)} />
         <Divider />
-        <Property />
+        <Property setReturnValue={updateReturnValue(2)} />
         <Divider />
-        <Auction />
+        <Auction setReturnValue={updateReturnValue(3)} />
+        <Divider />
+        <button id='confirmSelect' onClick={onClick}>
+          确认
+        </button>
       </div>
 
       <div id="house-show">
@@ -30,10 +50,6 @@ function App() {
         <HouseList />
       </div>
 
-      {/* 
-      <div>
-        <HousePage HouseID={"cjdoajffjffffje"} />
-      </div> */}
     </div>
   )
 }

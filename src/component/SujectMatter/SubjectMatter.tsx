@@ -8,7 +8,11 @@ const CheckboxGroup = Checkbox.Group;
 
 const plainOptions = ['住宅用地', '商业用房', '工业用房', '其他用房'];
 
-const SubjectMatter: React.FC = () => {
+interface SubjectMatterProps {
+    setReturnValue: Function
+}
+
+const SubjectMatter: React.FC<SubjectMatterProps> = ({ setReturnValue }) => {
     const [checkedList, setCheckedList] = useState<string[]>([]);
 
     const checkAll = plainOptions.length === checkedList.length;
@@ -16,10 +20,19 @@ const SubjectMatter: React.FC = () => {
 
     const onChange = (list: string[]) => {
         setCheckedList(list);
+        const codes = list.map(option => {
+            const index = plainOptions.indexOf(option);
+            return index + 1; // 住宅用地=1, 商业用房=2, 工业用房=3, 其他用房=4
+        });
+        codes.length > 0 ? setReturnValue(codes) : setReturnValue([]);
+        // console.log(codes.length > 0 ? codes.join(',') : '0');
     };
 
     const onCheckAllChange: CheckboxProps['onChange'] = (e) => {
-        setCheckedList(e.target.checked ? plainOptions : []);
+        const isCheckedAll = e.target.checked;
+        setCheckedList(isCheckedAll ? plainOptions : []);
+        isCheckedAll ? setReturnValue([1, 2, 3, 4]) : setReturnValue([]);
+        // console.log(isCheckedAll ? '1,2,3,4' : '0');
     };
 
     return (
