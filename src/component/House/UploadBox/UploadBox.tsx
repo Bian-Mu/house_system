@@ -17,27 +17,11 @@ const UploadBox: React.FC = () => {
     // 标的物类型选项
     const subjectMatterOptions = [
         { value: "1", label: "住宅用地" },
-        { value: "2", label: "商业用房" },
-        { value: "3", label: "工业用房" },
+        { value: "2", label: "工业用房" },
+        { value: "3", label: "商业用房" },
         { value: "4", label: "其他用房" },
     ];
 
-    // 资产类型选项
-    const propertyOptions = [
-        { value: "1", label: "涉刑资产" },
-        { value: "2", label: "诉讼资产" },
-        { value: "3", label: "破产资产" },
-        { value: "4", label: "自行处置" },
-    ];
-
-    // // 状态选项
-    // const statusOptions = [
-    //     { value: "1", label: "正在进行" },
-    //     { value: "2", label: "即将开始" },
-    //     { value: "3", label: "已结束" },
-    //     { value: "4", label: "中止" },
-    //     { value: "5", label: "撤回" },
-    // ];
 
     // 打开模态框
     const showModal = () => {
@@ -162,41 +146,7 @@ const UploadBox: React.FC = () => {
                             </Form.Item>
                         </Col>
 
-                        {/* 资产类型 */}
-                        <Col span={6}>
-                            <Form.Item
-                                name="property"
-                                label="资产类型"
-                                rules={[{ required: true, message: "请选择资产类型！" }]}
-                                className="four-col-form-item"
-                            >
-                                <Select placeholder="请选择资产类型">
-                                    {propertyOptions.map((option) => (
-                                        <Option key={option.value} value={option.value}>
-                                            {option.label}
-                                        </Option>
-                                    ))}
-                                </Select>
-                            </Form.Item>
-                        </Col>
 
-                        {/* 拍卖状态 */}
-                        {/* <Col span={6}>
-                            <Form.Item
-                                name="auction"
-                                label="拍卖状态"
-                                rules={[{ required: true, message: "请选择拍卖状态！" }]}
-                                className="four-col-form-item"
-                            >
-                                <Select placeholder="请选择拍卖状态">
-                                    {statusOptions.map((option) => (
-                                        <Option key={option.value} value={option.value}>
-                                            {option.label}
-                                        </Option>
-                                    ))}
-                                </Select>
-                            </Form.Item>
-                        </Col> */}
                     </Row>
 
 

@@ -6,7 +6,7 @@ import "./SubjectMatter.css"
 
 const CheckboxGroup = Checkbox.Group;
 
-const plainOptions = ['住宅用地', '商业用房', '工业用房', '其他用房'];
+const plainOptions = ['住宅用地', '工业用房', '商业用房', '其他用房'];
 
 interface SubjectMatterProps {
     setReturnValue: Function
@@ -22,17 +22,15 @@ const SubjectMatter: React.FC<SubjectMatterProps> = ({ setReturnValue }) => {
         setCheckedList(list);
         const codes = list.map(option => {
             const index = plainOptions.indexOf(option);
-            return index + 1; // 住宅用地=1, 商业用房=2, 工业用房=3, 其他用房=4
+            return index + 1;
         });
         codes.length > 0 ? setReturnValue(codes) : setReturnValue([]);
-        // console.log(codes.length > 0 ? codes.join(',') : '0');
     };
 
     const onCheckAllChange: CheckboxProps['onChange'] = (e) => {
         const isCheckedAll = e.target.checked;
         setCheckedList(isCheckedAll ? plainOptions : []);
         isCheckedAll ? setReturnValue([1, 2, 3, 4]) : setReturnValue([]);
-        // console.log(isCheckedAll ? '1,2,3,4' : '0');
     };
 
     return (

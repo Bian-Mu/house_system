@@ -1,13 +1,13 @@
 #all-select {
     width: 1200px;
-    height: 310px;
+    height: 450px;
     position: absolute;
     top: 20px;
     left: 50%;
     transform: translate(-50%, 0);
     border: 1px solid rgb(213, 213, 213);
     border-radius: 10px;
-    padding-top: 30px;
+    padding-top: 10px;
 }
 
 #confirmSelect {
@@ -21,13 +21,13 @@
 }
 
 #sort {
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 #house-show {
     width: 1200px;
     height: 1200px;
-    top: 400px;
+    top: 500px;
     left: 50%;
     transform: translate(-50%, 0);
     position: absolute;
@@ -70,4 +70,8 @@
         width: 100%;
         margin-bottom: 10px;
     }
+}
+
+.ant-divider {
+    margin: 8px 0 8px 0;
 }
