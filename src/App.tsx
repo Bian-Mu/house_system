@@ -13,13 +13,14 @@ import Direction from './component/House/Select/Direction/Direction'
 import Height from './component/House/Select/Height/Height'
 import Renovation from './component/House/Select/Renovation/Renovation'
 
+import transformArrayToSearchJson from './utils/search'
 
 function App() {
-  //更新后将筛选值发给后端，后端应该返回符合条件的房子的（第一张图片、地址、价格、id）
   const [searchValue, setSearchValue] = useState<number[][]>([[], [], [], [], [], [], [], [], []]);
 
   const onClick = () => {
-    console.log(searchValue)
+    console.log(transformArrayToSearchJson(searchValue))
+
   }
 
   const updateReturnValue = (index: number) => (value: number[]) => {

@@ -10,6 +10,7 @@ interface HouseCardShow {
     HouseCover: string
     HouseAdress: string
     HousePrice: number
+    HouseSize: number
     HouseID: number
 }
 
@@ -21,6 +22,7 @@ const houseTest: HouseCardShow = {
     HouseCover: House,
     HouseAdress: "成都市xxx区xx街道xx小区1幢1单元302室",
     HousePrice: 123,
+    HouseSize: 80,
     HouseID: 123456798765
 }
 
@@ -39,7 +41,7 @@ const HouseCard: React.FC<HouseCardProps> = ({ H }) => {
             className='single-card'
             cover={<img alt="example" src={H.HouseCover} />}
         >
-            <Meta title={H.HouseAdress} description={"当前标定价格：" + H.HousePrice + "万元"} />
+            <Meta title={H.HouseAdress} description={`实际面积：${H.HouseSize}平方米　　　　价格：${H.HousePrice}万元`} />
         </Card>
     )
 }
