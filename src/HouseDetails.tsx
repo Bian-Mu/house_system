@@ -3,6 +3,19 @@ import PicStream from './component/SingleInfo/PicStream/PicStream';
 
 import "./HouseDetails.css"
 
+
+
+
+import House from "./assets/image.png"
+import tgl from "./assets/Login.png"
+import { Divider } from 'antd';
+
+const imageList = [
+    House, tgl, House
+]
+
+
+
 const HouseDetails: React.FC = () => {
     const [HouseID, setHouseID] = useState<number | null>(null);
 
@@ -29,15 +42,14 @@ const HouseDetails: React.FC = () => {
     return (
         <div id="house-details">
             <div id='house-brief'>
-                {HouseID ? (
-                    <div>
-                        <p>当前房产ID: {HouseID}</p>
-                    </div>
-                ) : (
-                    <p>未找到房产信息</p>
-                )}
-                <PicStream />
+
+                <PicStream imageList={imageList} />
+                <div>
+                    <h2>四川省成都市金牛区某个小区1幢1单元101室</h2>
+                    <h3>定 价 ： xxx 万元</h3>
+                </div>
             </div>
+            <Divider />
             <div id='house-richtext'>
                 这里是富文本框
             </div>

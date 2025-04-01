@@ -1,4 +1,6 @@
 .PicStreamBox {
-    height: 260px;
-    width: 400px;
+    height: 292px;
+    width: 450px;
+    margin: 10px;
+    border: 1px solid gray;
 }

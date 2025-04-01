@@ -5,7 +5,30 @@
     left: 50%;
     top: 20px;
     transform: translate(-50%, 0);
-    border: 1px solid gray;
+    border: 1px solid rgb(179, 178, 178);
     padding: 10px;
     margin: 10px;
+    box-shadow: 24px -12px rgb(2, 168, 168);
+}
+
+#house-brief {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 310px;
+}
+
+#house-brief div h2 {
+    font-size: 32px;
+    font-weight: 500;
+    margin-top: 60px;
+    margin-bottom: 0;
+    height: 100px;
+    padding-left: 5px;
+}
+
+#house-brief div h3 {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 50px 0 0 0;
+    padding-left: 30px;
 }
