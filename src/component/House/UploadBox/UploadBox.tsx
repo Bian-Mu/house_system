@@ -14,6 +14,58 @@ const UploadBox: React.FC = () => {
     const [fileList, setFileList] = useState<UploadFile[]>([]);
     const [code, setCode] = useState("");
 
+    //特色
+    const specialOptions = [
+        { value: "1", label: "可贷款" },
+        { value: "2", label: "全程服务" },
+        { value: "3", label: "特价房" },
+        { value: "4", label: "地铁房" },
+        { value: "5", label: "无以上特色" },
+    ];
+
+
+    // 户型
+    const roomOptions = [
+        { value: "1", label: "一室" },
+        { value: "2", label: "二室" },
+        { value: "3", label: "三室" },
+        { value: "4", label: "四室" },
+        { value: "5", label: "四室以上" },
+    ];
+
+    // 房屋朝向
+    const directionOptions = [
+        { value: "1", label: "南" },
+        { value: "2", label: "北" },
+        { value: "3", label: "东" },
+        { value: "4", label: "西" },
+
+        { value: "5", label: "东南" },
+        { value: "6", label: "东北" },
+        { value: "7", label: "西北" },
+        { value: "8", label: "西南" },
+
+        { value: "9", label: "东西" },
+        { value: "10", label: "南北" },
+    ];
+
+    // 楼层
+    const heightOptions = [
+        { value: "1", label: "低楼层" },
+        { value: "2", label: "中楼层" },
+        { value: "3", label: "高楼层" },
+    ];
+
+    // 装修程度
+    const renovationOptions = [
+        { value: "1", label: "毛坯" },
+        { value: "2", label: "普通装修" },
+        { value: "3", label: "精装修" },
+        { value: "4", label: "其他" },
+    ];
+
+
+
     // 标的物类型选项
     const subjectMatterOptions = [
         { value: "1", label: "住宅用地" },
@@ -23,12 +75,10 @@ const UploadBox: React.FC = () => {
     ];
 
 
-    // 打开模态框
     const showModal = () => {
         setIsModalVisible(true);
     };
 
-    // 关闭模态框
     const handleCancel = () => {
         setIsModalVisible(false);
         form.resetFields(); // 重置表单
@@ -69,7 +119,6 @@ const UploadBox: React.FC = () => {
         setFileList(fileList);
     };
 
-    //图片上传逻辑
     const customRequest = async ({ file, onSuccess, onError }: any) => {
         try {
             // 这里应该是你的实际上传逻辑，例如：
@@ -90,12 +139,10 @@ const UploadBox: React.FC = () => {
 
     return (
         <div id="upload-box">
-            {/* 上传按钮 */}
             <Button type="primary" onClick={showModal}>
                 上传房源
             </Button>
 
-            {/* 模态框 */}
             <Modal
                 title="上传房源信息"
                 open={isModalVisible}
@@ -106,7 +153,6 @@ const UploadBox: React.FC = () => {
                 width={800}
             >
                 <Form form={form} layout="vertical">
-                    {/* 地址 - 单独一行 */}
                     <Form.Item
                         name="address"
                         label="地址（按照”xx省xx市xx区+详细地址“的格式，例如”四川省成都市金牛区xx小区第5单元302室“）"
@@ -116,7 +162,6 @@ const UploadBox: React.FC = () => {
                     </Form.Item>
 
                     <Row gutter={16}>
-                        {/* 价格 */}
                         <Col span={6}>
                             <Form.Item
                                 name="price"
@@ -127,8 +172,110 @@ const UploadBox: React.FC = () => {
                                 <Input type="number" placeholder="请输入房源价格" />
                             </Form.Item>
                         </Col>
+                        <Col span={6}>
+                            <Form.Item
+                                name="size"
+                                label="房屋面积（平方米）"
+                                rules={[{ required: true, message: "请输入房屋面积！" }]}
+                                className="four-col-form-item"
+                            >
+                                <Input type="number" placeholder="请输入房屋面积" />
+                            </Form.Item>
+                        </Col>
 
-                        {/* 标的物类型 */}
+                        <Col span={6}>
+                            <Form.Item
+                                name="special"
+                                label="特色"
+                                rules={[{ required: true, message: "请选择特色！" }]}
+                                className="four-col-form-item"
+                            >
+                                <Select placeholder="请选择特色">
+                                    {specialOptions.map((option) => (
+                                        <Option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
+                        </Col>
+
+                        <Col span={6}>
+                            <Form.Item
+                                name="room"
+                                label="户型"
+                                rules={[{ required: true, message: "请选择户型！" }]}
+                                className="four-col-form-item"
+                            >
+                                <Select placeholder="请选择户型">
+                                    {roomOptions.map((option) => (
+                                        <Option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
+                        </Col>
+
+
+
+
+                    </Row>
+
+
+                    <Row gutter={16}>
+
+                        <Col span={6}>
+                            <Form.Item
+                                name="direction"
+                                label="房屋朝向"
+                                rules={[{ required: true, message: "请选择房屋朝向！" }]}
+                                className="four-col-form-item"
+                            >
+                                <Select placeholder="请选择房屋朝向">
+                                    {directionOptions.map((option) => (
+                                        <Option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
+                        </Col>
+
+                        <Col span={6}>
+                            <Form.Item
+                                name="height"
+                                label="楼层"
+                                rules={[{ required: true, message: "请选择楼层！" }]}
+                                className="four-col-form-item"
+                            >
+                                <Select placeholder="请选择楼层">
+                                    {heightOptions.map((option) => (
+                                        <Option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
+                        </Col>
+
+                        <Col span={6}>
+                            <Form.Item
+                                name="renovation"
+                                label="装修程度"
+                                rules={[{ required: true, message: "请选择装修程度！" }]}
+                                className="four-col-form-item"
+                            >
+                                <Select placeholder="请选择装修程度">
+                                    {renovationOptions.map((option) => (
+                                        <Option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
+                        </Col>
+
                         <Col span={6}>
                             <Form.Item
                                 name="subjectmatter"
@@ -150,7 +297,6 @@ const UploadBox: React.FC = () => {
                     </Row>
 
 
-                    {/* 图片上传 - 单独一行 */}
                     <Form.Item label="相关图片（最多9张）">
                         <Upload
                             beforeUpload={beforeUpload}
@@ -170,7 +316,6 @@ const UploadBox: React.FC = () => {
                         </Upload>
                     </Form.Item>
 
-                    {/* 富文本上传 - 单独一行 */}
                     <Form.Item label="房源详情">
                         <RichModal content={code} setContent={setCode} />
                     </Form.Item>
