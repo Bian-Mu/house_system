@@ -1,6 +1,6 @@
 #all-select {
     width: 1200px;
-    height: 370px;
+    height: 310px;
     position: absolute;
     top: 20px;
     left: 50%;
@@ -27,7 +27,7 @@
 #house-show {
     width: 1200px;
     height: 1200px;
-    top: 440px;
+    top: 400px;
     left: 50%;
     transform: translate(-50%, 0);
     position: absolute;

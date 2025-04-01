@@ -16,28 +16,28 @@ const UploadBox: React.FC = () => {
 
     // 标的物类型选项
     const subjectMatterOptions = [
-        { value: "住宅用地", label: "住宅用地" },
-        { value: "商业用房", label: "商业用房" },
-        { value: "工业用房", label: "工业用房" },
-        { value: "其他用房", label: "其他用房" },
+        { value: "1", label: "住宅用地" },
+        { value: "2", label: "商业用房" },
+        { value: "3", label: "工业用房" },
+        { value: "4", label: "其他用房" },
     ];
 
     // 资产类型选项
     const propertyOptions = [
-        { value: "涉刑资产", label: "涉刑资产" },
-        { value: "诉讼资产", label: "诉讼资产" },
-        { value: "破产资产", label: "破产资产" },
-        { value: "自行处置", label: "自行处置" },
+        { value: "1", label: "涉刑资产" },
+        { value: "2", label: "诉讼资产" },
+        { value: "3", label: "破产资产" },
+        { value: "4", label: "自行处置" },
     ];
 
-    // 状态选项
-    const statusOptions = [
-        { value: "正在进行", label: "正在进行" },
-        { value: "即将开始", label: "即将开始" },
-        { value: "已结束", label: "已结束" },
-        { value: "中止", label: "中止" },
-        { value: "撤回", label: "撤回" },
-    ];
+    // // 状态选项
+    // const statusOptions = [
+    //     { value: "1", label: "正在进行" },
+    //     { value: "2", label: "即将开始" },
+    //     { value: "3", label: "已结束" },
+    //     { value: "4", label: "中止" },
+    //     { value: "5", label: "撤回" },
+    // ];
 
     // 打开模态框
     const showModal = () => {
@@ -59,6 +59,7 @@ const UploadBox: React.FC = () => {
             const values = await form.validateFields(); // 校验表单
             console.log("表单数据:", values);
             console.log("上传的文件:", fileList);
+            console.log(code)
 
             // 在这里编写上传逻辑，例如调用 API
             // await uploadData(values, fileList);
@@ -180,7 +181,7 @@ const UploadBox: React.FC = () => {
                         </Col>
 
                         {/* 拍卖状态 */}
-                        <Col span={6}>
+                        {/* <Col span={6}>
                             <Form.Item
                                 name="auction"
                                 label="拍卖状态"
@@ -195,7 +196,7 @@ const UploadBox: React.FC = () => {
                                     ))}
                                 </Select>
                             </Form.Item>
-                        </Col>
+                        </Col> */}
                     </Row>
 
 

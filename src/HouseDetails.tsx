@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PicStream from './component/SingleInfo/PicStream/PicStream';
 
+import "./HouseDetails.css"
 
 const HouseDetails: React.FC = () => {
     const [HouseID, setHouseID] = useState<number | null>(null);
@@ -19,16 +20,15 @@ const HouseDetails: React.FC = () => {
         // 设置标签页的 title
         document.title = 'xxx详情';
 
-        // 可选：在组件卸载时恢复原来的 title
-        return () => {
-            document.title = '房产';
-        };
+        // // 可选：在组件卸载时恢复原来的 title
+        // return () => {
+        //     document.title = '房产';
+        // };
     }, []);
 
     return (
-        <div>
-            <h1>这是新标签页的内容</h1>
-            <div id="house-details">
+        <div id="house-details">
+            <div id='house-brief'>
                 {HouseID ? (
                     <div>
                         <p>当前房产ID: {HouseID}</p>
@@ -37,6 +37,9 @@ const HouseDetails: React.FC = () => {
                     <p>未找到房产信息</p>
                 )}
                 <PicStream />
+            </div>
+            <div id='house-richtext'>
+                这里是富文本框
             </div>
         </div>
     );
