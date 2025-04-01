@@ -10,6 +10,7 @@ interface HouseCardShow {
     HouseCover: string
     HouseAdress: string
     HousePrice: number
+    HouseID: number
 }
 
 interface HouseCardProps {
@@ -19,15 +20,16 @@ interface HouseCardProps {
 const houseTest: HouseCardShow = {
     HouseCover: House,
     HouseAdress: "成都市xxx区xx街道xx小区1幢1单元302室",
-    HousePrice: 123
+    HousePrice: 123,
+    HouseID: 123456798765
 }
 
 
 const HouseCard: React.FC<HouseCardProps> = ({ H }) => {
     const handleClick = () => {
         // 打开新标签页并传递数据
-        const data = { message: 'Hello from the main page!' };
-        window.open(`/houseInfo`, '_blank');
+        const data = { message: H.HouseID };
+        window.open(`/houseInfo?houseid=${H.HouseID}`, '_blank');
     };
 
     return (

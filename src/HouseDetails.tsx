@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import HousePage from './component/House/HousePage/HousePage';
+import PicStream from './component/SingleInfo/PicStream/PicStream';
+
 
 const HouseDetails: React.FC = () => {
-    const [message, setMessage] = useState<string>('');
+    const [HouseID, setHouseID] = useState<number | null>(null);
+
 
     useEffect(() => {
         // 从 URL 参数中获取数据
         const urlParams = new URLSearchParams(window.location.search);
-        const data = urlParams.get('data');
+        const data = urlParams.get('houseid');
         if (data) {
-            const parsedData = JSON.parse(decodeURIComponent(data));
-            setMessage(parsedData.message);
+            setHouseID(parseInt(data));
         }
     }, []);
 
@@ -27,7 +28,16 @@ const HouseDetails: React.FC = () => {
     return (
         <div>
             <h1>这是新标签页的内容</h1>
-            <HousePage HouseID='dasefasef' />
+            <div id="house-details">
+                {HouseID ? (
+                    <div>
+                        <p>当前房产ID: {HouseID}</p>
+                    </div>
+                ) : (
+                    <p>未找到房产信息</p>
+                )}
+                <PicStream />
+            </div>
         </div>
     );
 };

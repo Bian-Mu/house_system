@@ -10,6 +10,7 @@ import { useState } from 'react'
 
 
 function App() {
+  //更新后将筛选值发给后端，后端应该返回符合条件的房子的（第一张图片、地址、价格、id）
   const [searchValue, setSearchValue] = useState<number[][]>([[], [], [], []]);
 
   const onClick = () => {
