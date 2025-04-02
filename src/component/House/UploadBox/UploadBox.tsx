@@ -102,7 +102,7 @@ const UploadBox: React.FC = () => {
     const handleSubmit = async () => {
         try {
             const values = await form.validateFields(); // 校验表单
-            console.log("表单数据:", values);
+            // console.log("表单数据:", values);
             // console.log("上传的文件:", fileList);
             // console.log(code);
 

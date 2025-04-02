@@ -54,7 +54,6 @@ export const uploadRichText = async (htmlContent: any) => {
             },
             body: JSON.stringify({ content: htmlContent }),
         });
-
         if (!response.ok) {
             throw new Error('富文本内容上传失败');
         }
