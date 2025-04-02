@@ -4,8 +4,6 @@ import PicStream from './component/SingleInfo/PicStream/PicStream';
 import "./HouseDetails.css"
 
 
-
-
 import House from "./assets/image.png"
 import tgl from "./assets/Login.png"
 import { Divider } from 'antd';
@@ -30,13 +28,7 @@ const HouseDetails: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        // 设置标签页的 title
         document.title = 'xxx详情';
-
-        // // 可选：在组件卸载时恢复原来的 title
-        // return () => {
-        //     document.title = '房产';
-        // };
     }, []);
 
     return (

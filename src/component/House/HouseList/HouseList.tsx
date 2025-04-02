@@ -1,37 +1,25 @@
 import React, { useState } from 'react';
 import { Card, Divider, Pagination } from 'antd';
 
-import House from "../../../assets/image.png"
 import "./HouseList.css"
 
 const { Meta } = Card;
 
 interface HouseCardShow {
-    HouseCover: string
-    HouseAdress: string
-    HousePrice: number
-    HouseSize: number
-    HouseID: number
+    cover: string
+    address: string
+    price: number
+    size: number
+    id: number
 }
 
 interface HouseCardProps {
     H: HouseCardShow
 }
 
-const houseTest: HouseCardShow = {
-    HouseCover: House,
-    HouseAdress: "成都市xxx区xx街道xx小区1幢1单元302室",
-    HousePrice: 123,
-    HouseSize: 80,
-    HouseID: 123456798765
-}
-
-
 const HouseCard: React.FC<HouseCardProps> = ({ H }) => {
     const handleClick = () => {
-        // 打开新标签页并传递数据
-        const data = { message: H.HouseID };
-        window.open(`/houseInfo?houseid=${H.HouseID}`, '_blank');
+        window.open(`/houseInfo?id=${H.id}`, '_blank');
     };
 
     return (
@@ -39,18 +27,20 @@ const HouseCard: React.FC<HouseCardProps> = ({ H }) => {
             onClick={handleClick}
             hoverable
             className='single-card'
-            cover={<img alt="example" src={H.HouseCover} />}
+            cover={<img alt="example" src={H.cover} />}
         >
-            <Meta title={H.HouseAdress} description={`实际面积：${H.HouseSize}平方米　　　　价格：${H.HousePrice}万元`} />
+            <Meta title={H.address} description={`实际面积：${H.size}平方米　　　　价格：${H.price}万元`} />
         </Card>
     )
 }
 
 
+interface HouseListProps {
+    list: HouseCardShow[]
+}
 
-
-const HouseList = () => {
-    let totalHouses = 50;
+const HouseList: React.FC<HouseListProps> = ({ list }) => {
+    let totalHouses = list.length;
     const housesPerPage = 9;
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -64,7 +54,7 @@ const HouseList = () => {
         const endIndex = startIndex + housesPerPage;
         const housesToRender = Array.from({ length: totalHouses })
             .slice(startIndex, endIndex)
-            .map((_, index) => <HouseCard key={startIndex + index} H={houseTest} />);
+            .map((_, index) => <HouseCard key={startIndex + index} H={list[startIndex + index]} />);
 
         return housesToRender;
     };

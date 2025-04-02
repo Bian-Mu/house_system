@@ -15,13 +15,67 @@ import Renovation from './component/House/Select/Renovation/Renovation'
 
 import transformArrayToSearchJson from './utils/search'
 
+interface HouseCardShow {
+  cover: string
+  address: string
+  price: number
+  size: number
+  id: number
+}
+
+// const list = [
+//   {
+//     "cover": "/src/assets/image.png",
+//     "address": "吉林省 安安市 沾化县 弘街826号 22号门牌",
+//     "price": 79.19,
+//     "size": 69,
+//     "id": 64534567876
+//   },
+//   {
+//     "cover": "/src/assets/image.png",
+//     "address": "湖南省 宁宁市 界首市 盈桥40号 41号院",
+//     "price": 507.79,
+//     "size": 23,
+//     "id": 8223456346
+//   },
+//   {
+//     "cover": "/src/assets/image.png",
+//     "address": "西藏自治区 南阳市 沾益县 晋栋3号 59号楼",
+//     "price": 801.21,
+//     "size": 71,
+//     "id": 2198765445
+//   }
+// ]
+
+
+
 function App() {
   const [searchValue, setSearchValue] = useState<number[][]>([[], [], [], [], [], [], [], [], []]);
+  const [list, setList] = useState<HouseCardShow[]>([])
 
-  const onClick = () => {
-    console.log(transformArrayToSearchJson(searchValue))
 
-  }
+  const onClick = async () => {
+    const requestData = transformArrayToSearchJson(searchValue)
+    try {
+      const response = await fetch('https://m1.apifoxmock.com/m2/6122515-5814159-default/279131372', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setList(data.results);
+      }
+
+    } catch (err) {
+      console.error('请求出错:', err);
+    }
+  };
+
 
   const updateReturnValue = (index: number) => (value: number[]) => {
     setSearchValue(prev => {
@@ -64,7 +118,7 @@ function App() {
           <Sort />
           <Divider />
         </div>
-        <HouseList />
+        <HouseList list={list} />
       </div>
 
     </div>
