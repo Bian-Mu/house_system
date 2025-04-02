@@ -6,7 +6,7 @@ import "./Special.css"
 
 const CheckboxGroup = Checkbox.Group;
 
-const plainOptions = ['可贷款', '全程服务', '特价房', '地铁房'];
+const plainOptions = ['可贷款', '全程服务', '特价房', '地铁房', '其他'];
 
 interface SpecialProps {
     setReturnValue: Function
@@ -30,7 +30,7 @@ const Special: React.FC<SpecialProps> = ({ setReturnValue }) => {
     const onCheckAllChange: CheckboxProps['onChange'] = (e) => {
         const isCheckedAll = e.target.checked;
         setCheckedList(isCheckedAll ? plainOptions : []);
-        isCheckedAll ? setReturnValue([1, 2, 3, 4]) : setReturnValue([]);
+        isCheckedAll ? setReturnValue([1, 2, 3, 4, 5]) : setReturnValue([]);
     };
 
     return (

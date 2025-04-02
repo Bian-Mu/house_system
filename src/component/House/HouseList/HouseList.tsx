@@ -11,6 +11,7 @@ interface HouseCardShow {
     price: number
     size: number
     id: number
+    uploadTime: string
 }
 
 interface HouseCardProps {

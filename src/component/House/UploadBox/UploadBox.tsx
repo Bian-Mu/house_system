@@ -1,12 +1,25 @@
 import React, { useState } from "react";
-import { Button, Modal, Form, Input, Upload, message, Select, Col, Row } from "antd";
+import { Button, Modal, Form, Input, Upload, message, Select, Col, Row, Cascader } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import type { UploadFile, UploadProps } from "antd/es/upload/interface";
 import type { FormInstance } from "antd/es/form";
 import RichModal from "../RichText/RichText";
 import "./UploadBox.css";
+import { uploadJsonData, uploadImages, uploadRichText } from "../../../utils/upload";
 
 const { Option } = Select;
+
+import area from "../../../assets/newArea.json"
+
+
+interface Option {
+    value: number;
+    label: string;
+    children?: Option[];
+}
+
+const options: Option[] = area as Option[]
+
 
 const UploadBox: React.FC = () => {
     const [form] = Form.useForm<FormInstance>();
@@ -20,7 +33,7 @@ const UploadBox: React.FC = () => {
         { value: "2", label: "全程服务" },
         { value: "3", label: "特价房" },
         { value: "4", label: "地铁房" },
-        { value: "5", label: "无以上特色" },
+        { value: "5", label: "其他（无以上特色）" },
     ];
 
 
@@ -86,22 +99,29 @@ const UploadBox: React.FC = () => {
         setCode("");
     };
 
-    // 提交表单
     const handleSubmit = async () => {
-        console.log(code)
         try {
             const values = await form.validateFields(); // 校验表单
             console.log("表单数据:", values);
-            console.log("上传的文件:", fileList);
-            console.log(code)
+            // console.log("上传的文件:", fileList);
+            // console.log(code);
 
-            // 在这里编写上传逻辑，例如调用 API
-            // await uploadData(values, fileList);
+            message.loading({ content: '正在上传数据...', key: 'uploadStatus' });
 
-            message.success("上传成功！");
+            // 1. 首先上传JSON数据
+            await uploadJsonData(values);
+
+            // 2. 然后上传图片
+            await uploadImages(fileList);
+
+            // 3. 最后上传富文本内容
+            await uploadRichText(code);
+
+            message.success({ content: "所有数据上传成功！", key: 'uploadStatus' });
             handleCancel(); // 关闭模态框
         } catch (error) {
-            console.error("表单校验失败:", error);
+            console.error("上传过程中出错:", error);
+            message.error({ content: `上传失败: ${error}`, key: 'uploadStatus' });
         }
     };
 
@@ -121,12 +141,6 @@ const UploadBox: React.FC = () => {
 
     const customRequest = async ({ file, onSuccess, onError }: any) => {
         try {
-            // 这里应该是你的实际上传逻辑，例如：
-            // const formData = new FormData();
-            // formData.append('file', file);
-            // const response = await axios.post('/api/upload', formData);
-
-            // 模拟上传成功
             setTimeout(() => {
                 onSuccess(null, file);
                 message.success(`${file.name} 文件上传成功`);
@@ -136,6 +150,8 @@ const UploadBox: React.FC = () => {
             message.error(`${file.name} 文件上传失败`);
         }
     };
+
+
 
     return (
         <div id="upload-box">
@@ -152,15 +168,29 @@ const UploadBox: React.FC = () => {
                 cancelText="取消"
                 width={800}
             >
-                <Form form={form} layout="vertical">
-                    <Form.Item
-                        name="address"
-                        label="地址（按照”xx省xx市xx区+详细地址“的格式，例如”四川省成都市金牛区xx小区第5单元302室“）"
-                        rules={[{ required: true, message: "请输入地址！" }]}
-                    >
-                        <Input placeholder="请输入房源地址" />
-                    </Form.Item>
 
+                <Form form={form} layout="vertical">
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                normalize={(value) => value ? value[2] : null}
+                                name={['address', 'distinct']}
+                                label="地区编码"
+                                rules={[{ required: true, message: "请输入地址！" }]}
+                            >
+                                <Cascader options={options} size='large' id="area-select" />
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                name={['address', 'details']}
+                                label="详细地址"
+                                rules={[{ required: true, message: "请输入地址！" }]}
+                            >
+                                <Input placeholder="请输入详细地址" />
+                            </Form.Item>
+                        </Col>
+                    </Row>
                     <Row gutter={16}>
                         <Col span={6}>
                             <Form.Item
@@ -216,10 +246,6 @@ const UploadBox: React.FC = () => {
                                 </Select>
                             </Form.Item>
                         </Col>
-
-
-
-
                     </Row>
 
 

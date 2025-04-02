@@ -30,7 +30,7 @@ const Height: React.FC<HeightProps> = ({ setReturnValue }) => {
     const onCheckAllChange: CheckboxProps['onChange'] = (e) => {
         const isCheckedAll = e.target.checked;
         setCheckedList(isCheckedAll ? plainOptions : []);
-        isCheckedAll ? setReturnValue([1, 2, 3, 4]) : setReturnValue([]);
+        isCheckedAll ? setReturnValue([1, 2, 3]) : setReturnValue([]);
     };
 
     return (

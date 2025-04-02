@@ -4,7 +4,7 @@ import AreaSelect from './component/House/Select/AreaSelect/AreaSelect'
 import SubjectMatter from './component/House/Select/SujectMatter/SubjectMatter'
 import Sort from './component/House/Sort/Sort'
 import HouseList from './component/House/HouseList/HouseList'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Price from './component/House/Select/Price/Price'
 import Size from './component/House/Select/Size/Size'
 import Special from './component/House/Select/Special/Special'
@@ -21,6 +21,7 @@ interface HouseCardShow {
   price: number
   size: number
   id: number
+  uploadTime: string
 }
 
 // const list = [
@@ -52,10 +53,32 @@ interface HouseCardShow {
 function App() {
   const [searchValue, setSearchValue] = useState<number[][]>([[], [], [], [], [], [], [], [], []]);
   const [list, setList] = useState<HouseCardShow[]>([])
+  const [loading, setLoading] = useState(true);
 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://m1.apifoxmock.com/m1/6122515-5814159-default/house/initialSearch');
+
+        const data = await response.json();
+        if (data.success) {
+          setList(data.results);
+        }
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const onClick = async () => {
     const requestData = transformArrayToSearchJson(searchValue)
+    console.log(requestData)
+    setLoading(true)
     try {
       const response = await fetch('https://m1.apifoxmock.com/m2/6122515-5814159-default/279131372', {
         method: 'POST',
@@ -69,10 +92,13 @@ function App() {
 
       if (data.success) {
         setList(data.results);
+
       }
 
     } catch (err) {
       console.error('请求出错:', err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -84,6 +110,7 @@ function App() {
       return newValue;
     });
   }
+
 
   return (
     <div >
@@ -118,9 +145,8 @@ function App() {
           <Sort />
           <Divider />
         </div>
-        <HouseList list={list} />
+        {loading ? <div>Loading...</div> : <HouseList list={list} />}
       </div>
-
     </div>
   )
 }

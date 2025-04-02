@@ -15,18 +15,29 @@ interface requestJson {
 }
 
 function transformArrayToSearchJson(inputArray: number[][]): requestJson {
+    let address = {
+        province: -1,
+        city: 1,
+        district: 0,
+    };
     if (inputArray.length !== 9) {
         throw new Error("输入数组必须是 9 行");
     }
-    if (inputArray[0].length !== 3) {
-        throw new Error("第一行必须有且只有 3 个元素（省、市、区）");
+    if (inputArray[0].length == 2) {
+        address = {
+            province: inputArray[0][0],
+            city: inputArray[0][1],
+            district: 1,
+        };
+    } else {
+        address = {
+            province: inputArray[0][0],
+            city: inputArray[0][1],
+            district: inputArray[0][2],
+        };
     }
 
-    const address = {
-        province: inputArray[0][0],
-        city: inputArray[0][1],
-        district: inputArray[0][2],
-    };
+
 
     const [
         price,
