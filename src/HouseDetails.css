@@ -34,12 +34,19 @@
 }
 
 #button-box {
-    position: absolute;
-    top: 120px;
-    right: 22%;
-    transform: translate(40%, 0);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
+#button-box div {
+    margin-top: 10px;
+    width: 50%;
+    padding-left: 20%;
+}
+
+#upload-box {
+    margin: 0;
+}
 
 #signal {
     position: absolute;
@@ -51,6 +58,8 @@
     padding-bottom: 5px;
     left: 50%;
     transform: translate(-50%, 0);
+    display: grid;
+    grid-template-columns: 3fr 1fr;
 }
 
 #signal img {

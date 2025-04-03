@@ -4,10 +4,10 @@ import "./HouseDetails.css"
 import House from "./assets/image.png"
 import tgl from "./assets/Login.png"
 import { Divider } from 'antd';
-import { data } from 'react-router';
 import UploadBox from './component/House/UploadBox/UploadBox';
 
 import signal from "./assets/signal.jpg"
+import DeleteButton from './component/House/DeleteButton/DeleteButton';
 // const imageList = [
 //     House, tgl, House
 // ]
@@ -77,9 +77,13 @@ const HouseDetails: React.FC = () => {
 
     if (Data) {
         return (
-            <>
+            <div className='details-page'>
                 <div id="signal">
                     <img src={signal} />
+                    <div id='button-box'>
+                        <DeleteButton type={HouseID} />
+                        <UploadBox name='修改' type={HouseID} />
+                    </div>
                 </div>
                 <div id="house-details">
                     <div id='house-brief'>
@@ -94,11 +98,8 @@ const HouseDetails: React.FC = () => {
                         {Data.richText}
                     </div>
                 </div>
-                <div id='button-box'>
-                    {/* <DeleteButton type={HouseID}/> */}
-                    <UploadBox name='修改' type={HouseID} />
-                </div>
-            </>
+
+            </div>
 
         );
     }
