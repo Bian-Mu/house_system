@@ -1,8 +1,20 @@
+#address-search {
+    position: fixed;
+    top: 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    left: 50%;
+    width: 1220px;
+    background-color: white;
+    z-index: 1;
+    transform: translate(-50%, 0);
+}
+
 #all-select {
     width: 1200px;
     height: 455px;
     position: absolute;
-    top: 20px;
+    top: 70px;
     left: 50%;
     transform: translate(-50%, 0);
     border: 1px solid rgb(213, 213, 213);
@@ -27,7 +39,7 @@
 #house-show {
     width: 1200px;
     height: 1200px;
-    top: 500px;
+    top: 550px;
     left: 50%;
     transform: translate(-50%, 0);
     position: absolute;

@@ -14,6 +14,7 @@ import Height from './component/House/Select/Height/Height'
 import Renovation from './component/House/Select/Renovation/Renovation'
 
 import transformArrayToSearchJson from './utils/search'
+import AddressSearch from './component/House/AddressSearch/AddressSearch'
 
 interface HouseCardShow {
   cover: string
@@ -114,6 +115,9 @@ function App() {
 
   return (
     <div >
+      <div id="address-search">
+        <AddressSearch />
+      </div>
       <div id="all-select">
 
         <AreaSelect setReturnValue={updateReturnValue(0)} />
