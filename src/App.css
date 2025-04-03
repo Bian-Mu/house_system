@@ -4,17 +4,24 @@
     padding-top: 15px;
     padding-bottom: 15px;
     left: 50%;
-    width: 1220px;
+    width: 1280px;
     background-color: white;
     z-index: 1;
     transform: translate(-50%, 0);
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+}
+
+#address-search img {
+    margin: 0;
+    width: 160px;
 }
 
 #all-select {
     width: 1200px;
     height: 455px;
     position: absolute;
-    top: 70px;
+    top: 75px;
     left: 50%;
     transform: translate(-50%, 0);
     border: 1px solid rgb(213, 213, 213);
@@ -39,7 +46,7 @@
 #house-show {
     width: 1200px;
     height: 1200px;
-    top: 550px;
+    top: 555px;
     left: 50%;
     transform: translate(-50%, 0);
     position: absolute;

@@ -20,8 +20,12 @@ interface Option {
 
 const options: Option[] = area as Option[]
 
+interface UploadBoxProps {
+    name: string
+    type: number
+}
 
-const UploadBox: React.FC = () => {
+const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
     const [form] = Form.useForm<FormInstance>();
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
     const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -109,13 +113,13 @@ const UploadBox: React.FC = () => {
             message.loading({ content: '正在上传数据...', key: 'uploadStatus' });
 
             // 1. 首先上传JSON数据
-            await uploadJsonData(values);
+            await uploadJsonData(values, type);
 
             // 2. 然后上传图片
-            await uploadImages(fileList);
+            await uploadImages(fileList, type);
 
             // 3. 最后上传富文本内容
-            await uploadRichText(code);
+            await uploadRichText(code, type);
 
             message.success({ content: "所有数据上传成功！", key: 'uploadStatus' });
             handleCancel(); // 关闭模态框
@@ -156,11 +160,11 @@ const UploadBox: React.FC = () => {
     return (
         <div id="upload-box">
             <Button type="primary" onClick={showModal}>
-                上传房源
+                {name}房源
             </Button>
 
             <Modal
-                title="上传房源信息"
+                title="设置房源信息"
                 open={isModalVisible}
                 onOk={handleSubmit}
                 onCancel={handleCancel}

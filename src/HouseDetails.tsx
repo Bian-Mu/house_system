@@ -5,7 +5,9 @@ import House from "./assets/image.png"
 import tgl from "./assets/Login.png"
 import { Divider } from 'antd';
 import { data } from 'react-router';
+import UploadBox from './component/House/UploadBox/UploadBox';
 
+import signal from "./assets/signal.jpg"
 // const imageList = [
 //     House, tgl, House
 // ]
@@ -33,7 +35,7 @@ interface IResponseData {
 }
 
 const HouseDetails: React.FC = () => {
-    const [HouseID, setHouseID] = useState<number | null>(null);
+    const [HouseID, setHouseID] = useState<number>(0);
     const [Data, setData] = useState<Result>();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -75,19 +77,30 @@ const HouseDetails: React.FC = () => {
 
     if (Data) {
         return (
-            <div id="house-details">
-                <div id='house-brief'>
-                    <PicStream imageList={Data.images} />
-                    <div>
-                        <h2>{Data.basic.address.details}</h2>
-                        <h3>定 价 ： {Data.basic.price} 万元</h3>
+            <>
+                <div id="signal">
+                    <img src={signal} />
+                </div>
+                <div id="house-details">
+                    <div id='house-brief'>
+                        <PicStream imageList={Data.images} />
+                        <div>
+                            <h2>{Data.basic.address.details}</h2>
+                            <h3>定 价 ： {Data.basic.price} 万元</h3>
+                        </div>
+                    </div>
+                    <Divider />
+                    <div id='house-richtext'>
+                        {Data.richText}
                     </div>
                 </div>
-                <Divider />
-                <div id='house-richtext'>
-                    {Data?.richText}
+                <div id='button-box'>
+                    {/* <DeleteButton type={HouseID}/> */}
+                    <UploadBox name='修改' type={HouseID} />
                 </div>
-            </div>);
+            </>
+
+        );
     }
 };
 

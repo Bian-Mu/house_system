@@ -15,6 +15,9 @@ import Renovation from './component/House/Select/Renovation/Renovation'
 
 import transformArrayToSearchJson from './utils/search'
 import AddressSearch from './component/House/AddressSearch/AddressSearch'
+import signal from "./assets/signal.jpg"
+
+
 
 interface HouseCardShow {
   cover: string
@@ -78,7 +81,7 @@ function App() {
 
   const onClick = async () => {
     const requestData = transformArrayToSearchJson(searchValue)
-    console.log(requestData)
+    // console.log(requestData)
     setLoading(true)
     try {
       const response = await fetch('https://m1.apifoxmock.com/m2/6122515-5814159-default/279131372', {
@@ -112,11 +115,32 @@ function App() {
     });
   }
 
+  const onEnter = async (value: string) => {
+    // console.log(value)
+    setLoading(true)
+    try {
+      const response = await fetch(`https://m1.apifoxmock.com/m1/6122515-5814159-default/house/addressSearch?address=${value}`, {
+        method: "GET",
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setList(data.results);
+      }
+    } catch (err) {
+      console.error("请求出错：", err)
+    } finally {
+      setLoading(false);
+    }
+  }
+
 
   return (
     <div >
       <div id="address-search">
-        <AddressSearch />
+        <AddressSearch onEnter={onEnter} />
+        <img src={signal} />
       </div>
       <div id="all-select">
 

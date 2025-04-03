@@ -1,8 +1,10 @@
 // 上传JSON数据
-export const uploadJsonData = async (jsonData: any) => {
+export const uploadJsonData = async (jsonData: any, type: number) => {
+    const urlNew = 'https://m1.apifoxmock.com/m1/6122515-5814159-default/house/createInfo'
+    const urlModify = `https://m1.apifoxmock.com/m1/6122515-5814159-default/house/modifyInfo/${type}`
     try {
-        const response = await fetch('https://m1.apifoxmock.com/m1/6122515-5814159-default/house/createInfo', {
-            method: 'POST',
+        const response = await fetch(type == 0 ? urlNew : urlModify, {
+            method: type == 0 ? 'POST' : "PUT",
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -21,15 +23,18 @@ export const uploadJsonData = async (jsonData: any) => {
 };
 
 // 上传图片
-export const uploadImages = async (images: any[]) => {
+export const uploadImages = async (images: any[], type: number) => {
+    const urlNew = 'https://m1.apifoxmock.com/m1/6122515-5814159-default/house/createPic'
+    const urlModify = `https://m1.apifoxmock.com/m1/6122515-5814159-default/house/modifyPic/${type}`
+
     try {
         const formData = new FormData();
         images.forEach((file) => {
             formData.append('images', file.originFileObj);
         });
 
-        const response = await fetch('https://m1.apifoxmock.com/m1/6122515-5814159-default/house/createPic', {
-            method: 'POST',
+        const response = await fetch(type == 0 ? urlNew : urlModify, {
+            method: type == 0 ? 'POST' : "PUT",
             body: formData,
         });
 
@@ -45,10 +50,13 @@ export const uploadImages = async (images: any[]) => {
 };
 
 // 上传富文本内容
-export const uploadRichText = async (htmlContent: any) => {
+export const uploadRichText = async (htmlContent: any, type: number) => {
+    const urlNew = 'https://m1.apifoxmock.com/m1/6122515-5814159-default/house/createRichText'
+    const urlModify = `https://m1.apifoxmock.com/m1/6122515-5814159-default/house/modifyRichText/${type}`
+
     try {
-        const response = await fetch('https://m1.apifoxmock.com/m1/6122515-5814159-default/house/createRichText', {
-            method: 'POST',
+        const response = await fetch(type == 0 ? urlNew : urlModify, {
+            method: type == 0 ? 'POST' : "PUT",
             headers: {
                 'Content-Type': 'application/json',
             },
