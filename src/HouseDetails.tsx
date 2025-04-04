@@ -48,11 +48,14 @@ const HouseDetails: React.FC = () => {
     const fetchHouseDetails = async () => {
         setLoading(true);
         try {
+            const token = localStorage.getItem('token');
+            if (!token) throw new Error('未找到认证token');
+
             const response = await fetch(`https://m1.apifoxmock.com/m1/6122515-5814159-default/house/idSearch?id=${HouseID}`, {
                 method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json',
-                }
+                    'Authorization': `Bearer ${token}`  // 添加Authorization头
+                },
             });
 
             const data = await response.json();
@@ -78,7 +81,10 @@ const HouseDetails: React.FC = () => {
                     <img src={signal} />
                     <div id='button-box'>
                         <DeleteButton type={HouseID} />
-                        <UploadBox name='修改' type={HouseID} />
+                        <div id="reupload-box">
+                            <UploadBox name='修改' type={HouseID} />
+                        </div>
+
                     </div>
                 </div>
                 <div id="house-details">
@@ -91,7 +97,12 @@ const HouseDetails: React.FC = () => {
                     </div>
                     <Divider />
                     <div id='house-richtext'>
-                        {Data.richText}
+                        <iframe
+                            src={Data.richText}
+                            title="Rich Text Content"
+                            style={{ width: '100%', height: '500px', border: 'none' }}
+                            sandbox="allow-same-origin"
+                        />
                     </div>
                 </div>
 

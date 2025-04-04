@@ -63,7 +63,15 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://m1.apifoxmock.com/m1/6122515-5814159-default/house/initialSearch');
+        const token = localStorage.getItem('token');
+        if (!token) throw new Error('未找到认证token');
+
+        const response = await fetch('https://m1.apifoxmock.com/m1/6122515-5814159-default/house/initialSearch', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          method: "GET"
+        });
 
         const data = await response.json();
         // if (data.success) {
@@ -84,10 +92,13 @@ function App() {
     // console.log(requestData)
     setLoading(true)
     try {
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('未找到认证token');
+
       const response = await fetch('https://m1.apifoxmock.com/m2/6122515-5814159-default/279131372', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`  // 添加Authorization头
         },
         body: JSON.stringify(requestData),
       });
@@ -119,8 +130,14 @@ function App() {
     // console.log(value)
     setLoading(true)
     try {
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('未找到认证token');
+
       const response = await fetch(`https://m1.apifoxmock.com/m1/6122515-5814159-default/house/addressSearch?address=${value}`, {
         method: "GET",
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
       });
 
       const data = await response.json();

@@ -32,7 +32,10 @@ const Sort: React.FC = () => (
                 { value: 'up', label: '升序' },
             ]}
         />
-        <UploadBox name='上传' type={0} />
+        <div id='upload-box'>
+            <UploadBox name='上传' type={0} />
+        </div>
+
     </Space>
 );
 

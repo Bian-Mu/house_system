@@ -158,7 +158,7 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
 
 
     return (
-        <div id="upload-box">
+        <>
             <Button type="primary" onClick={showModal}>
                 {name}房源
             </Button>
@@ -351,7 +351,7 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
                     </Form.Item>
                 </Form>
             </Modal>
-        </div>
+        </>
     );
 };
 
