@@ -29,10 +29,6 @@ interface Result {
     richText: string;
 }
 
-interface IResponseData {
-    success: boolean;
-    results: Result;
-}
 
 const HouseDetails: React.FC = () => {
     const [HouseID, setHouseID] = useState<number>(0);
@@ -59,11 +55,11 @@ const HouseDetails: React.FC = () => {
                 }
             });
 
-            const json: IResponseData = await response.json();
+            const data = await response.json();
 
-            if (json.success) {
-                setData(json.results);
-            }
+            // if (data.success) {
+            setData(data.results);
+            // }
         } catch (err) {
             console.error('请求失败:', err);
         } finally {

@@ -2,26 +2,29 @@ import type { FormProps } from 'antd';
 import { Button, Form, Input } from 'antd';
 import "./Login.css"
 
-import axios from "axios"
-
 
 type FieldType = {
-    phone?: string;
-    password?: string;
-    // remember?: string;
+    phone: string;
+    password: string;
 };
 
 const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     try {
-        const response = await axios.post('https://m1.apifoxmock.com/m1/6122515-5814159-default/auth/login', values);
+        const response = await fetch('https://m1.apifoxmock.com/m1/6122515-5814159-default/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(values),
+        });
 
-        console.log('完整响应:', response); // 查看整个响应
-        console.log('响应数据:', response.data); // 查看返回的数据结构
+        // console.log('响应数据:', response.data); // 查看返回的数据结构
 
 
-        if (response.data.success) {
-            // localStorage.setItem('phone', response.data.phone);
-            // localStorage.setItem('token', response.data.token);
+        if (response.ok) {
+            const data = await response.json()
+            localStorage.setItem('phone', data.result.phone);
+            localStorage.setItem('token', data.result.token);
             window.location.href = '/';
         } else {
             alert('Login failed');

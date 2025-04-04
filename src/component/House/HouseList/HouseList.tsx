@@ -10,7 +10,7 @@ interface HouseCardShow {
     address: string
     price: number
     size: number
-    id: number
+    houseID: number
     uploadTime: string
 }
 
@@ -20,7 +20,7 @@ interface HouseCardProps {
 
 const HouseCard: React.FC<HouseCardProps> = ({ H }) => {
     const handleClick = () => {
-        window.open(`/houseInfo?id=${H.id}`, '_blank');
+        window.open(`/houseInfo?id=${H.houseID}`, '_blank');
     };
 
     return (

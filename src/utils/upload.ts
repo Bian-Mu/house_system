@@ -14,8 +14,14 @@ export const uploadJsonData = async (jsonData: any, type: number) => {
         if (!response.ok) {
             throw new Error('JSON数据上传失败');
         }
-
         console.log('JSON数据上传成功');
+        const data = await response.json();
+        if (type == 0) {
+            return data.houseID;
+        } else {
+            return 0;
+        }
+
     } catch (error) {
         console.error('上传JSON数据时出错:', error);
         throw error;
@@ -23,8 +29,8 @@ export const uploadJsonData = async (jsonData: any, type: number) => {
 };
 
 // 上传图片
-export const uploadImages = async (images: any[], type: number) => {
-    const urlNew = 'https://m1.apifoxmock.com/m1/6122515-5814159-default/house/createPic'
+export const uploadImages = async (images: any[], type: number, newID: number) => {
+    const urlNew = `https://m1.apifoxmock.com/m1/6122515-5814159-default/house/createPic/${newID}`
     const urlModify = `https://m1.apifoxmock.com/m1/6122515-5814159-default/house/modifyPic/${type}`
 
     try {
@@ -50,8 +56,8 @@ export const uploadImages = async (images: any[], type: number) => {
 };
 
 // 上传富文本内容
-export const uploadRichText = async (htmlContent: any, type: number) => {
-    const urlNew = 'https://m1.apifoxmock.com/m1/6122515-5814159-default/house/createRichText'
+export const uploadRichText = async (htmlContent: any, type: number, newID: number) => {
+    const urlNew = `https://m1.apifoxmock.com/m1/6122515-5814159-default/house/createRichText/${newID}`
     const urlModify = `https://m1.apifoxmock.com/m1/6122515-5814159-default/house/modifyRichText/${type}`
 
     try {

@@ -113,13 +113,13 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
             message.loading({ content: '正在上传数据...', key: 'uploadStatus' });
 
             // 1. 首先上传JSON数据
-            await uploadJsonData(values, type);
+            const IfNewID = await uploadJsonData(values, type);
 
             // 2. 然后上传图片
-            await uploadImages(fileList, type);
+            await uploadImages(fileList, type, IfNewID);
 
             // 3. 最后上传富文本内容
-            await uploadRichText(code, type);
+            await uploadRichText(code, type, IfNewID);
 
             message.success({ content: "所有数据上传成功！", key: 'uploadStatus' });
             handleCancel(); // 关闭模态框

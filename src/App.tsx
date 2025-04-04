@@ -24,7 +24,7 @@ interface HouseCardShow {
   address: string
   price: number
   size: number
-  id: number
+  houseID: number
   uploadTime: string
 }
 
@@ -66,9 +66,9 @@ function App() {
         const response = await fetch('https://m1.apifoxmock.com/m1/6122515-5814159-default/house/initialSearch');
 
         const data = await response.json();
-        if (data.success) {
-          setList(data.results);
-        }
+        // if (data.success) {
+        setList(data.results);
+        // }
       } catch (err) {
         console.error('Error fetching data:', err);
       } finally {
@@ -94,10 +94,10 @@ function App() {
 
       const data = await response.json();
 
-      if (data.success) {
-        setList(data.results);
+      // if (data.success) {
+      setList(data.results);
 
-      }
+      // }
 
     } catch (err) {
       console.error('请求出错:', err);
@@ -125,9 +125,9 @@ function App() {
 
       const data = await response.json();
 
-      if (data.success) {
-        setList(data.results);
-      }
+      // if (data.success) {
+      setList(data.results);
+      // }
     } catch (err) {
       console.error("请求出错：", err)
     } finally {
