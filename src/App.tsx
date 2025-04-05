@@ -1,5 +1,5 @@
 import './App.css'
-import { Divider } from 'antd'
+import { Button, Divider } from 'antd'
 import AreaSelect from './component/House/Select/AreaSelect/AreaSelect'
 import SubjectMatter from './component/House/Select/SujectMatter/SubjectMatter'
 import Sort from './component/House/Sort/Sort'
@@ -66,7 +66,7 @@ function App() {
         const token = localStorage.getItem('token');
         if (!token) throw new Error('未找到认证token');
 
-        const response = await fetch('https://m1.apifoxmock.com/m1/6122515-5814159-default/house/initialSearch', {
+        const response = await fetch('https://m1.apifoxmock.com/m1/6122515-5814159-default/house/list', {
           headers: {
             'Authorization': `Bearer ${token}`
           },
@@ -158,6 +158,9 @@ function App() {
       <div id="address-search">
         <AddressSearch onEnter={onEnter} />
         <img src={signal} />
+        <Button onClick={() => { window.open(`/customer`, '_blank') }} id='jumpToCustomer'>
+          查看客户
+        </Button>
       </div>
       <div id="all-select">
 

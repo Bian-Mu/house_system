@@ -60,6 +60,26 @@ const HouseList: React.FC<HouseListProps> = ({ list }) => {
         return housesToRender;
     };
 
+    if (!list) {
+        return (
+            <div>
+                <div id="house-cards" >
+                    暂无对应查询房源
+                </div>
+                <Divider />
+                <div id='page-convert'>
+                    <Pagination
+                        current={currentPage}
+                        total={totalHouses}
+                        pageSize={housesPerPage}
+                        onChange={handlePageChange}
+                        showSizeChanger={false}
+                    />
+                </div>
+
+            </div>
+        );
+    }
     return (
         <div>
             <div id="house-cards" >

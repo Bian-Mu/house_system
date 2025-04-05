@@ -9,12 +9,16 @@
     z-index: 1;
     transform: translate(-50%, 0);
     display: grid;
-    grid-template-columns: 6fr 1fr;
+    grid-template-columns: 7fr 1fr 1fr;
 }
 
 #address-search img {
     margin: 0;
     width: 160px;
+}
+
+#jumpToCustomer {
+    margin: 5px 0 0 20px;
 }
 
 #all-select {
