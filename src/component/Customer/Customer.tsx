@@ -12,14 +12,22 @@ import {
     Pagination,
     Divider,
 } from 'antd';
-
+import axios from 'axios';
 import "./Customer.css"
 
 const { Option } = Select;
 
-// 定义数据类型
+const pinyinCompare = (a: string, b: string) => {
+    return a.localeCompare(b, 'zh-CN');
+};
+
+function generateId() {
+    return window.crypto.getRandomValues(new Uint32Array(1))[0].toString(36);
+}
+
 interface DataType {
     key: React.Key;
+    customer_id: string;
     name: string;
     phone: string;
     gender: '男' | '女';
@@ -28,31 +36,9 @@ interface DataType {
     other: string;
 }
 
-// 初始数据
-const initialData: DataType[] = [
-    {
-        key: '1',
-        name: '张三',
-        phone: '13800138000',
-        gender: '男',
-        address: '北京市朝阳区',
-        price: 50,
-        other: '急需购房'
-    },
-    {
-        key: '2',
-        name: '李四',
-        phone: '13900139000',
-        gender: '女',
-        address: '上海市浦东新区',
-        price: 60,
-        other: '学区房优先'
-    },
-    // 可以添加更多初始数据...
-];
 
-// 定义可编辑单元格的props类型
-interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
+// 可编辑单元格组件
+const EditableCell: React.FC<{
     editing: boolean;
     dataIndex: string;
     title: string;
@@ -60,10 +46,7 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     record: DataType;
     index: number;
     children: React.ReactNode;
-}
-
-// 可编辑单元格组件
-const EditableCell: React.FC<EditableCellProps> = ({
+}> = ({
     editing,
     dataIndex,
     title,
@@ -73,54 +56,86 @@ const EditableCell: React.FC<EditableCellProps> = ({
     children,
     ...restProps
 }) => {
-    const inputNode = inputType === 'number' ? <InputNumber /> :
-        inputType === 'gender' ? (
-            <Select>
-                <Option value="男">男</Option>
-                <Option value="女">女</Option>
-            </Select>
-        ) : <Input />;
+        const inputNode = inputType === 'number' ? <InputNumber /> :
+            inputType === 'gender' ? (
+                <Select>
+                    <Option value="男">男</Option>
+                    <Option value="女">女</Option>
+                </Select>
+            ) : <Input />;
 
-    return (
-        <td {...restProps}>
-            {editing ? (
-                <Form.Item
-                    name={dataIndex}
-                    style={{ margin: 0 }}
-                    rules={[
-                        {
-                            required: true,
-                            message: `请输入${title}!`,
-                        },
-                    ]}
-                >
-                    {inputNode}
-                </Form.Item>
-            ) : (
-                children
-            )}
-        </td>
-    );
-};
+        return (
+            <td {...restProps}>
+                {editing ? (
+                    <Form.Item
+                        name={dataIndex}
+                        style={{ margin: 0 }}
+                        rules={[
+                            {
+                                required: true,
+                                message: `请输入${title}!`,
+                            },
+                        ]}
+                    >
+                        {inputNode}
+                    </Form.Item>
+                ) : (
+                    children
+                )}
+            </td>
+        );
+    };
 
 const Customer: React.FC = () => {
     const [form] = Form.useForm<DataType>();
-    const [data, setData] = useState<DataType[]>(initialData);
+    const [data, setData] = useState<DataType[]>([]);
     const [editingKey, setEditingKey] = useState<React.Key>('');
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [loading, setLoading] = useState<boolean>(false);
     const pageSize = 15;
 
     useEffect(() => {
         document.title = '客户详情';
+        fetchData();
     }, []);
+
+    const fetchData = async () => {
+        setLoading(true);
+        try {
+            const response = await axios.get('https://m1.apifoxmock.com/m1/6122515-5814159-default/customer/list');
+            const rawData = response.data.results;
+
+            const processedData = [...rawData]
+                .sort((a, b) => pinyinCompare(a.name, b.name))
+                .map((item, index) => ({
+                    ...item,
+                    key: index.toString()
+                }));
+
+            setData(processedData);
+        } catch (error) {
+            message.error('获取数据失败');
+            console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const isEditing = (record: DataType) => record.key === editingKey;
 
     const edit = (record: DataType) => {
+        form.setFieldsValue({ ...record });
         setEditingKey(record.key);
     };
 
-    const cancel = () => {
+    const cancel = async (key: React.Key) => {
+        const newData = [...data];
+        const index = newData.findIndex((item) => key === item.key);
+
+        if (index > -1 && !newData[index].customer_id) {
+            newData.splice(index, 1);
+            setData(newData);
+        }
         setEditingKey('');
     };
 
@@ -132,26 +147,50 @@ const Customer: React.FC = () => {
 
             if (index > -1) {
                 const item = newData[index];
-                newData.splice(index, 1, { ...item, ...row });
-                setData(newData);
-                setEditingKey('');
-                message.success('保存成功');
-            } else {
-                message.error('保存失败');
+                const updatedItem = { ...item, ...row };
+                const { key, ...dataToSend } = updatedItem;
+                try {
+                    if (!item.customer_id) {
+                        // 新增数据
+                        item.customer_id = generateId()
+                        await axios.post(`https://m1.apifoxmock.com/m1/6122515-5814159-default/customer/add/${item.customer_id}`, dataToSend);
+                        message.success('添加成功');
+                    } else {
+                        // 更新数据
+                        await axios.put(`https://m1.apifoxmock.com/m1/6122515-5814159-default/customer/modify/${item.customer_id}`, dataToSend);
+                        message.success('更新成功');
+                    }
+                    console.log(updatedItem)
+                    newData.splice(index, 1, updatedItem);
+                    setData(newData);
+                    setEditingKey('');
+                } catch (error) {
+                    console.error('Error saving data:', error);
+                    message.error('保存失败');
+                }
             }
         } catch (errInfo) {
             console.log('Validate Failed:', errInfo);
         }
     };
 
-    const handleDelete = (key: React.Key) => {
+    const handleDelete = async (key: React.Key) => {
         const newData = [...data];
         const index = newData.findIndex((item) => key === item.key);
 
         if (index > -1) {
-            newData.splice(index, 1);
-            setData(newData);
-            message.success('删除成功');
+            const item = newData[index];
+            try {
+                if (item.customer_id) {
+                    await axios.delete(`https://m1.apifoxmock.com/m1/6122515-5814159-default/customer/delete/${item.customer_id}`);
+                }
+                newData.splice(index, 1);
+                setData(newData);
+                message.success('删除成功');
+            } catch (error) {
+                console.error('Error deleting data:', error);
+                message.error('删除失败');
+            }
         }
     };
 
@@ -159,6 +198,7 @@ const Customer: React.FC = () => {
         const newKey = Date.now().toString();
         const newRecord: DataType = {
             key: newKey,
+            customer_id: '',
             name: '',
             phone: '',
             gender: '男',
@@ -226,7 +266,7 @@ const Customer: React.FC = () => {
                         <Button type="link" onClick={() => save(record.key)}>
                             保存
                         </Button>
-                        <Button type="link" onClick={cancel}>
+                        <Button type="link" onClick={() => cancel(record.key)}>
                             取消
                         </Button>
                     </Space>
@@ -292,6 +332,7 @@ const Customer: React.FC = () => {
                     columns={mergedColumns}
                     rowClassName="editable-row"
                     pagination={false}
+                    loading={loading}
                 />
             </Form>
             <Divider />
