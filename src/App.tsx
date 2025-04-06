@@ -59,6 +59,15 @@ function App() {
   const [list, setList] = useState<HouseCardShow[]>([])
   const [loading, setLoading] = useState(true);
 
+  const [sort, setSort] = useState(["default", "default"])
+
+  const handleWayChange = (value: string) => {
+    setSort([value, sort[1]]);
+  };
+
+  const handleUpDownChange = (value: string) => {
+    setSort([sort[0], value]);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,7 +104,7 @@ function App() {
       const token = localStorage.getItem('token');
       if (!token) throw new Error('未找到认证token');
 
-      const response = await fetch('https://m1.apifoxmock.com/m2/6122515-5814159-default/279131372', {
+      const response = await fetch('https://m1.apifoxmock.com/m1/6122515-5814159-default/house/select', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`  // 添加Authorization头
@@ -133,7 +142,7 @@ function App() {
       const token = localStorage.getItem('token');
       if (!token) throw new Error('未找到认证token');
 
-      const response = await fetch(`https://m1.apifoxmock.com/m1/6122515-5814159-default/house/addressSearch?address=${value}`, {
+      const response = await fetch(`https://m1.apifoxmock.com/m1/6122515-5814159-default/house/search?address=${value}`, {
         method: "GET",
         headers: {
           'Authorization': `Bearer ${token}`
@@ -190,10 +199,11 @@ function App() {
 
       <div id="house-show">
         <div id="sort">
-          <Sort />
+          <Sort onWayChange={handleWayChange}
+            onUpDownChange={handleUpDownChange} />
           <Divider />
         </div>
-        {loading ? <div>Loading...</div> : <HouseList list={list} />}
+        {loading ? <div>Loading...</div> : <HouseList list={list} sort={sort} />}
       </div>
     </div>
   )

@@ -4,17 +4,19 @@ import "./Sort.css"
 import UploadBox from '../UploadBox/UploadBox';
 
 
-const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-};
 
-const Sort: React.FC = () => (
+interface SortProps {
+    onWayChange: (value: string) => void;
+    onUpDownChange: (value: string) => void;
+}
+
+const Sort: React.FC<SortProps> = ({ onWayChange, onUpDownChange }) => (
     <Space wrap>
         <Select
             className='sort-item'
             defaultValue="default"
             style={{ width: 120 }}
-            onChange={handleChange}
+            onChange={onWayChange}
             options={[
                 { value: 'default', label: '默认排序' },
                 { value: 'price', label: '价格排序' },
@@ -25,7 +27,7 @@ const Sort: React.FC = () => (
             className='sort-item'
             defaultValue="default"
             style={{ width: 120 }}
-            onChange={handleChange}
+            onChange={onUpDownChange}
             options={[
                 { value: 'default', label: '默认' },
                 { value: 'down', label: '降序' },
