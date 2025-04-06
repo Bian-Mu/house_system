@@ -9,7 +9,7 @@
     z-index: 1;
     transform: translate(-50%, 0);
     display: grid;
-    grid-template-columns: 7fr 1fr 1fr;
+    grid-template-columns: 11fr 1fr 1fr 2fr;
 }
 
 #address-search img {

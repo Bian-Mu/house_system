@@ -16,6 +16,7 @@ import Renovation from './component/House/Select/Renovation/Renovation'
 import transformArrayToSearchJson from './utils/search'
 import AddressSearch from './component/House/AddressSearch/AddressSearch'
 import signal from "./assets/signal.jpg"
+import UserInfo from './component/House/UserInfo/UserInfo'
 
 
 
@@ -162,12 +163,15 @@ function App() {
 
   return (
     <div >
+
       <div id="address-search">
         <AddressSearch onEnter={onEnter} />
-        <img src={signal} />
+
         <Button onClick={() => { window.open(`/customer`, '_blank') }} id='jumpToCustomer'>
           查看客户
         </Button>
+        <UserInfo />
+        <img src={signal} />
       </div>
       <div id="all-select">
 

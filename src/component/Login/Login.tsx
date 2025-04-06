@@ -23,8 +23,10 @@ const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
 
         if (response.ok) {
             const data = await response.json()
-            localStorage.setItem('phone', data.result.phone);
+            // console.log(data.result)
+            localStorage.setItem('phone', data.result.User.phone);
             localStorage.setItem('token', data.result.token);
+            localStorage.setItem('username', data.result.User.username);
             window.location.href = '/';
         } else {
             alert('Login failed');
@@ -67,9 +69,13 @@ function Login() {
                         <Input.Password placeholder='密码：' className='login-input' />
                     </Form.Item>
 
-                    <Form.Item label={null}>
-                        <Button type="primary" htmlType="submit">
-                            确认
+                    <Form.Item label={null} className='login-button'>
+                        <Button type="primary" onClick={() => window.location.href = '/register'} className='login-button'>
+                            注册
+                        </Button>
+
+                        <Button type="primary" htmlType="submit" className='login-button'>
+                            登陆
                         </Button>
                     </Form.Item>
                 </Form>
