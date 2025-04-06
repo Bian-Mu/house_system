@@ -103,10 +103,20 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
         setCode("");
     };
 
+
     const handleSubmit = async () => {
         try {
-            const values = await form.validateFields(); // 校验表单
-            // console.log("表单数据:", values);
+
+            const initialvalues = await form.validateFields(); // 校验表单
+            const values = Object.fromEntries(
+                Object.entries(initialvalues).map(([key, value]) => {
+                    if (typeof value === 'string' && /^-?\d+(\.\d+)?$/.test(value)) {
+                        return [key, parseFloat(value)];
+                    }
+                    return [key, value];
+                })
+            );
+            console.log("表单数据:", values);
             // console.log("上传的文件:", fileList);
             // console.log(code);
 

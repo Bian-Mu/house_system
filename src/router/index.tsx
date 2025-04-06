@@ -19,13 +19,13 @@ const router = createBrowserRouter([
     },
     {
         path: "/",
-        // element: localStorage.getItem('token') ? <App /> : <Navigate to="/login" replace />
-        element: <App />
+        element: localStorage.getItem('token') ? <App /> : <Navigate to="/login" replace />
+        // element: <App />
     },
     {
         path: "/houseInfo",
-        // element: localStorage.getItem('token') ? <HouseDetails /> : <Navigate to="/login" replace />
-        element: <HouseDetails />
+        element: localStorage.getItem('token') ? <HouseDetails /> : <Navigate to="/login" replace />
+        // element: <HouseDetails />
     },
     {
         path: '*',

@@ -8,6 +8,7 @@ import UploadBox from './component/House/UploadBox/UploadBox';
 
 import signal from "./assets/signal.jpg"
 import DeleteButton from './component/House/DeleteButton/DeleteButton';
+import HtmlView from './component/House/HtmlView/HtmlView';
 // const imageList = [
 //     House, tgl, House
 // ]
@@ -41,7 +42,10 @@ const HouseDetails: React.FC = () => {
         const data = urlParams.get('id');
         if (data) {
             setHouseID(parseInt(data));
-            fetchHouseDetails();
+            if (HouseID) {
+                fetchHouseDetails();
+            }
+
         }
     }, [HouseID]);
 
@@ -51,7 +55,7 @@ const HouseDetails: React.FC = () => {
             const token = localStorage.getItem('token');
             if (!token) throw new Error('未找到认证token');
 
-            const response = await fetch(`https://m1.apifoxmock.com/m1/6122515-5814159-default/house/info/${HouseID}`, {
+            const response = await fetch(`https://swyacgknewea.sealoshzh.site/house/info/${HouseID}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`  // 添加Authorization头
@@ -97,12 +101,7 @@ const HouseDetails: React.FC = () => {
                     </div>
                     <Divider />
                     <div id='house-richtext'>
-                        <iframe
-                            src={Data.richText}
-                            title="Rich Text Content"
-                            style={{ width: '100%', height: '500px', border: 'none' }}
-                            sandbox="allow-same-origin"
-                        />
+                        <HtmlView url={Data.richText} />
                     </div>
                 </div>
 

@@ -102,7 +102,7 @@ const Customer: React.FC = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('https://m1.apifoxmock.com/m1/6122515-5814159-default/customer/list');
+            const response = await axios.get('https://swyacgknewea.sealoshzh.site/customer/list');
             const rawData = response.data.results;
 
             const processedData = [...rawData]
@@ -153,11 +153,11 @@ const Customer: React.FC = () => {
                     if (!item.customer_id) {
                         // 新增数据
                         item.customer_id = generateId()
-                        await axios.post(`https://m1.apifoxmock.com/m1/6122515-5814159-default/customer/add/${item.customer_id}`, dataToSend);
+                        await axios.post(`https://swyacgknewea.sealoshzh.site/customer/add/${item.customer_id}`, dataToSend);
                         message.success('添加成功');
                     } else {
                         // 更新数据
-                        await axios.put(`https://m1.apifoxmock.com/m1/6122515-5814159-default/customer/modify/${item.customer_id}`, dataToSend);
+                        await axios.put(`https://swyacgknewea.sealoshzh.site/customer/modify/${item.customer_id}`, dataToSend);
                         message.success('更新成功');
                     }
                     console.log(updatedItem)
@@ -182,7 +182,7 @@ const Customer: React.FC = () => {
             const item = newData[index];
             try {
                 if (item.customer_id) {
-                    await axios.delete(`https://m1.apifoxmock.com/m1/6122515-5814159-default/customer/delete/${item.customer_id}`);
+                    await axios.delete(`https://swyacgknewea.sealoshzh.site/customer/delete/${item.customer_id}`);
                 }
                 newData.splice(index, 1);
                 setData(newData);

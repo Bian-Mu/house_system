@@ -10,7 +10,7 @@ const handleClick = async (type: number) => {
         const token = localStorage.getItem('token');
         if (!token) throw new Error('未找到认证token');
 
-        const response = await fetch(`https://m1.apifoxmock.com/m1/6122515-5814159-default/house/delete/${type}`, {
+        const response = await fetch(`https://swyacgknewea.sealoshzh.site/house/delete/${type}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`  // 添加Authorization头

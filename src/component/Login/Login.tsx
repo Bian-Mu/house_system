@@ -10,7 +10,7 @@ type FieldType = {
 
 const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     try {
-        const response = await fetch('https://m1.apifoxmock.com/m1/6122515-5814159-default/auth/login', {
+        const response = await fetch('https://swyacgknewea.sealoshzh.site/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

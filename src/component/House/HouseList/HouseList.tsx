@@ -27,7 +27,7 @@ const HouseCard: React.FC<HouseCardProps> = ({ H }) => {
             onClick={handleClick}
             hoverable
             className='single-card'
-            cover={<img alt="example" src={H.cover} />}
+            cover={<img alt="example" src={H.cover} style={{ "height": "220px" }} />}
         >
             <Meta title={H.address} description={`实际面积：${H.size}平方米　　　　价格：${H.price}万元`} />
         </Card>

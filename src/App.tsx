@@ -75,7 +75,7 @@ function App() {
         const token = localStorage.getItem('token');
         if (!token) throw new Error('未找到认证token');
 
-        const response = await fetch('https://m1.apifoxmock.com/m1/6122515-5814159-default/house/list', {
+        const response = await fetch('https://swyacgknewea.sealoshzh.site/house/list', {
           headers: {
             'Authorization': `Bearer ${token}`
           },
@@ -98,13 +98,14 @@ function App() {
 
   const onClick = async () => {
     const requestData = transformArrayToSearchJson(searchValue)
-    // console.log(requestData)
+    console.log(requestData)
     setLoading(true)
     try {
       const token = localStorage.getItem('token');
       if (!token) throw new Error('未找到认证token');
 
-      const response = await fetch('https://m1.apifoxmock.com/m1/6122515-5814159-default/house/select', {
+      // console.log(token)
+      const response = await fetch('https://swyacgknewea.sealoshzh.site/house/select', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`  // 添加Authorization头
@@ -112,12 +113,9 @@ function App() {
         body: JSON.stringify(requestData),
       });
 
+      // console.log(response)
       const data = await response.json();
-
-      // if (data.success) {
       setList(data.results);
-
-      // }
 
     } catch (err) {
       console.error('请求出错:', err);
@@ -142,7 +140,7 @@ function App() {
       const token = localStorage.getItem('token');
       if (!token) throw new Error('未找到认证token');
 
-      const response = await fetch(`https://m1.apifoxmock.com/m1/6122515-5814159-default/house/search?address=${value}`, {
+      const response = await fetch(`https://swyacgknewea.sealoshzh.site/house/search?address=${value}`, {
         method: "GET",
         headers: {
           'Authorization': `Bearer ${token}`
