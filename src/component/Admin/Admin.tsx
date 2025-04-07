@@ -9,8 +9,8 @@ import {
     Divider,
     Spin
 } from 'antd';
-import axios from 'axios';
-
+import InviteBox from './InviteBox';
+import "./Admin.css"
 interface User {
     key: React.Key;
     username: string;
@@ -37,7 +37,7 @@ const Admin: React.FC = () => {
                 throw new Error('未找到认证token');
             }
 
-            const response = await fetch("https://m1.apifoxmock.com/m1/6122515-5814159-default/admin/list", {
+            const response = await fetch("https://swyacgknewea.sealoshzh.site/admin/list", {
                 method: "GET",
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -75,7 +75,7 @@ const Admin: React.FC = () => {
                 throw new Error('未找到要删除的用户');
             }
 
-            const response = await fetch(`https://m1.apifoxmock.com/m1/6122515-5814159-default/admin/delete/user/${userToDelete.phone}`, {
+            const response = await fetch(`https://swyacgknewea.sealoshzh.site/admin/delete/user/${userToDelete.phone}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },
@@ -139,28 +139,34 @@ const Admin: React.FC = () => {
     );
 
     return (
-        <div style={{ padding: 24 }}>
-            <Spin spinning={loading}>
-                <Table
-                    bordered
-                    dataSource={paginatedData}
-                    columns={columns}
-                    pagination={false}
-                    rowKey="key"
-                />
-                <Divider />
-                <Pagination
-                    align='center'
-                    current={currentPage}
-                    pageSize={pageSize}
-                    total={userList.length}
-                    onChange={(page: number) => setCurrentPage(page)}
-                    style={{ marginTop: 16, textAlign: "center" }}
-                    showSizeChanger={false}
-                    showTotal={(total) => `共 ${total} 条`}
-                />
-            </Spin>
-        </div>
+        <>
+            <div id='invite-box'>
+                <InviteBox />
+            </div>
+            <div style={{ padding: 24 }}>
+                <Spin spinning={loading}>
+                    <Table
+                        bordered
+                        dataSource={paginatedData}
+                        columns={columns}
+                        pagination={false}
+                        rowKey="key"
+                    />
+                    <Divider />
+                    <Pagination
+                        align='center'
+                        current={currentPage}
+                        pageSize={pageSize}
+                        total={userList.length}
+                        onChange={(page: number) => setCurrentPage(page)}
+                        style={{ marginTop: 16, textAlign: "center" }}
+                        showSizeChanger={false}
+                        showTotal={(total) => `共 ${total} 条`}
+                    />
+                </Spin>
+            </div>
+        </>
+
     );
 };
 

@@ -32,7 +32,7 @@ interface DataType {
     phone: string;
     gender: '男' | '女';
     address: string;
-    price: number;
+    price: string;
     other: string;
 }
 
@@ -102,10 +102,20 @@ const Customer: React.FC = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('https://swyacgknewea.sealoshzh.site/customer/list');
-            const rawData = response.data.results;
+            const token = localStorage.getItem('token');
+            if (!token) {
+                throw new Error('未找到认证token');
+            }
 
-            const processedData = [...rawData]
+            const response = await fetch('https://swyacgknewea.sealoshzh.site/customer/list', {
+                method: "GET",
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+            });
+            const rawData = await response.json()
+            // console.log(rawData)
+            const processedData = [...rawData.results]
                 .sort((a, b) => pinyinCompare(a.name, b.name))
                 .map((item, index) => ({
                     ...item,
@@ -147,20 +157,44 @@ const Customer: React.FC = () => {
 
             if (index > -1) {
                 const item = newData[index];
-                const updatedItem = { ...item, ...row };
-                const { key, ...dataToSend } = updatedItem;
+
                 try {
+                    const token = localStorage.getItem('token');
+                    if (!token) {
+                        throw new Error('未找到认证token');
+                    }
                     if (!item.customer_id) {
                         // 新增数据
                         item.customer_id = generateId()
-                        await axios.post(`https://swyacgknewea.sealoshzh.site/customer/add/${item.customer_id}`, dataToSend);
-                        message.success('添加成功');
+                        const updatedItem = { ...item, ...row };
+                        const { key, ...dataToSend } = updatedItem;
+                        const response = await fetch(`https://swyacgknewea.sealoshzh.site/customer/create`, {
+                            method: "POST",
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify(dataToSend)
+                        });
+                        if (response.ok) {
+                            message.success('添加成功');
+                        }
+
                     } else {
                         // 更新数据
-                        await axios.put(`https://swyacgknewea.sealoshzh.site/customer/modify/${item.customer_id}`, dataToSend);
-                        message.success('更新成功');
+                        const updatedItem = { ...item, ...row };
+                        const { key, ...dataToSend } = updatedItem;
+                        const response = await fetch(`https://swyacgknewea.sealoshzh.site/customer/update/${item.customer_id}`, {
+                            method: "PUT",
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify(dataToSend)
+                        });
+                        if (response.ok) {
+                            message.success('更新成功');
+                        }
                     }
-                    console.log(updatedItem)
+                    const updatedItem = { ...item, ...row };
                     newData.splice(index, 1, updatedItem);
                     setData(newData);
                     setEditingKey('');
@@ -182,11 +216,25 @@ const Customer: React.FC = () => {
             const item = newData[index];
             try {
                 if (item.customer_id) {
-                    await axios.delete(`https://swyacgknewea.sealoshzh.site/customer/delete/${item.customer_id}`);
+                    const token = localStorage.getItem('token');
+                    if (!token) {
+                        throw new Error('未找到认证token');
+                    }
+                    const response = await fetch(`https://swyacgknewea.sealoshzh.site/customer/delete/${item.customer_id}`, {
+                        method: "DELETE",
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        },
+                    });
+                    console.log(item)
+                    if (response.ok) {
+                        newData.splice(index, 1);
+                        setData(newData);
+                        message.success('删除成功');
+                    }
                 }
-                newData.splice(index, 1);
-                setData(newData);
-                message.success('删除成功');
+
+
             } catch (error) {
                 console.error('Error deleting data:', error);
                 message.error('删除失败');
@@ -203,7 +251,7 @@ const Customer: React.FC = () => {
             phone: '',
             gender: '男',
             address: '',
-            price: 0,
+            price: "0",
             other: ''
         };
 
@@ -295,7 +343,7 @@ const Customer: React.FC = () => {
             ...col,
             onCell: (record: DataType) => ({
                 record,
-                inputType: col.dataIndex === 'price' ? 'number' :
+                inputType: col.dataIndex === 'price' ? 'string' :
                     col.dataIndex === 'gender' ? 'gender' : 'text',
                 dataIndex: col.dataIndex,
                 title: col.title,

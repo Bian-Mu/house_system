@@ -2,6 +2,7 @@ import type { FormProps } from 'antd';
 import { Button, Form, Input } from 'antd';
 import "./Login.css"
 import { useEffect } from 'react';
+import { data } from 'react-router';
 
 
 type FieldType = {
@@ -12,9 +13,9 @@ type FieldType = {
 const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     try {
         if (values.phone === "admin") {
-            const response = await fetch("https://m1.apifoxmock.com/m1/6122515-5814159-default/auth/admin/login", {
+            const response = await fetch("https://swyacgknewea.sealoshzh.site/auth/admin/login", {
                 method: "POST",
-                body: JSON.stringify(values.password)
+                body: JSON.stringify({ password: values.password })
             })
             if (response.ok) {
                 const data = await response.json()
@@ -38,12 +39,13 @@ const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
             if (response.ok) {
                 const data = await response.json()
                 // console.log(data.result)
-                localStorage.setItem('phone', data.result.User.phone);
+                localStorage.setItem('phone', data.result.user.phone);
                 localStorage.setItem('token', data.result.token);
-                localStorage.setItem('username', data.result.User.username);
+                localStorage.setItem('username', data.result.user.username);
                 window.location.href = '/';
             } else {
-                alert('Login failed');
+                const data = await response.json()
+                alert(`Login failed:${data.message}`);
             }
         }
     } catch (error) {
