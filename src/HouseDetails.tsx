@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PicStream from './component/SingleInfo/PicStream/PicStream';
 import "./HouseDetails.css"
-import House from "./assets/image.png"
-import tgl from "./assets/Login.png"
+// import House from "./assets/image.png"
+// import tgl from "./assets/Login.png"
 import { Divider } from 'antd';
 import UploadBox from './component/House/UploadBox/UploadBox';
 

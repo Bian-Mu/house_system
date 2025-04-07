@@ -79,7 +79,7 @@ const HouseList: React.FC<HouseListProps> = ({ list, sort }) => {
         const endIndex = startIndex + housesPerPage;
         return sortedList
             .slice(startIndex, endIndex)
-            .map((house, index) => <HouseCard key={house.houseID} H={house} />);
+            .map((house, _) => <HouseCard key={house.houseID} H={house} />);
     };
 
     if (!list || list.length === 0) {

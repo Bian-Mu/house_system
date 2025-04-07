@@ -12,7 +12,6 @@ import {
     Pagination,
     Divider,
 } from 'antd';
-import axios from 'axios';
 import "./Customer.css"
 
 const { Option } = Select;

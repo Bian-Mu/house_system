@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Checkbox, Divider } from 'antd';
+import { Checkbox } from 'antd';
 import type { CheckboxProps } from 'antd';
 
 import "./Property.css"

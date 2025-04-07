@@ -2,7 +2,6 @@ import type { FormProps } from 'antd';
 import { Button, Form, Input } from 'antd';
 import "./Login.css"
 import { useEffect } from 'react';
-import { data } from 'react-router';
 
 
 type FieldType = {
@@ -35,13 +34,13 @@ const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
 
             // console.log('响应数据:', response.data); // 查看返回的数据结构
 
-
+            // console.log(response.json())
             if (response.ok) {
                 const data = await response.json()
                 // console.log(data.result)
-                localStorage.setItem('phone', data.result.user.phone);
-                localStorage.setItem('token', data.result.token);
-                localStorage.setItem('username', data.result.user.username);
+                localStorage.setItem('phone', data.results.user.phone);
+                localStorage.setItem('token', data.results.token);
+                localStorage.setItem('username', data.results.user.username);
                 window.location.href = '/';
             } else {
                 const data = await response.json()
