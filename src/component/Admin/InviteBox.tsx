@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Input, message } from 'antd';
+import { API_BASE_URL } from '../../constants';
 
 interface InviteBoxProps {
     initialValue?: string;
@@ -26,7 +27,7 @@ const InviteBox: React.FC<InviteBoxProps> = ({
                 throw new Error('未找到认证token');
             }
 
-            const response = await fetch("https://swyacgknewea.sealoshzh.site/admin/invite_code", {
+            const response = await fetch(`${API_BASE_URL}/admin/invite_code`, {
                 method: "POST",
                 headers: {
                     'Authorization': `Bearer ${token}`

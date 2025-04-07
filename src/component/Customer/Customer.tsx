@@ -13,7 +13,7 @@ import {
     Divider,
 } from 'antd';
 import "./Customer.css"
-
+import { API_BASE_URL } from '../../constants';
 const { Option } = Select;
 
 const pinyinCompare = (a: string, b: string) => {
@@ -106,7 +106,7 @@ const Customer: React.FC = () => {
                 throw new Error('未找到认证token');
             }
 
-            const response = await fetch('https://swyacgknewea.sealoshzh.site/customer/list', {
+            const response = await fetch(`${API_BASE_URL}/customer/list`, {
                 method: "GET",
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -167,7 +167,7 @@ const Customer: React.FC = () => {
                         item.customer_id = generateId()
                         const updatedItem = { ...item, ...row };
                         const { key, ...dataToSend } = updatedItem;
-                        const response = await fetch(`https://swyacgknewea.sealoshzh.site/customer/create`, {
+                        const response = await fetch(`${API_BASE_URL}/customer/create`, {
                             method: "POST",
                             headers: {
                                 'Authorization': `Bearer ${token}`
@@ -182,7 +182,7 @@ const Customer: React.FC = () => {
                         // 更新数据
                         const updatedItem = { ...item, ...row };
                         const { key, ...dataToSend } = updatedItem;
-                        const response = await fetch(`https://swyacgknewea.sealoshzh.site/customer/update/${item.customer_id}`, {
+                        const response = await fetch(`${API_BASE_URL}/customer/update/${item.customer_id}`, {
                             method: "PUT",
                             headers: {
                                 'Authorization': `Bearer ${token}`
@@ -219,7 +219,7 @@ const Customer: React.FC = () => {
                     if (!token) {
                         throw new Error('未找到认证token');
                     }
-                    const response = await fetch(`https://swyacgknewea.sealoshzh.site/customer/delete/${item.customer_id}`, {
+                    const response = await fetch(`${API_BASE_URL}/customer/delete/${item.customer_id}`, {
                         method: "DELETE",
                         headers: {
                             'Authorization': `Bearer ${token}`

@@ -1,7 +1,9 @@
+import { API_BASE_URL } from "../constants";
+
 // 上传JSON数据
 export const uploadJsonData = async (jsonData: any, type: number) => {
-    const urlNew = 'https://swyacgknewea.sealoshzh.site/house/create/info'
-    const urlModify = `https://swyacgknewea.sealoshzh.site/house/update/info/${type}`
+    const urlNew = `${API_BASE_URL}/house/create/info`
+    const urlModify = `${API_BASE_URL}/house/update/info/${type}`
     try {
         const token = localStorage.getItem('token');
         if (!token) throw new Error('未找到认证token');
@@ -33,8 +35,8 @@ export const uploadJsonData = async (jsonData: any, type: number) => {
 
 // 上传图片
 export const uploadImages = async (images: any[], type: number, newID: number) => {
-    const urlNew = `https://swyacgknewea.sealoshzh.site/house/create/image/${newID}`
-    const urlModify = `https://swyacgknewea.sealoshzh.site/house/update/image/${type}`
+    const urlNew = `${API_BASE_URL}/house/create/image/${newID}`
+    const urlModify = `${API_BASE_URL}/house/update/image/${type}`
 
     try {
         const token = localStorage.getItem('token');
@@ -66,8 +68,8 @@ export const uploadImages = async (images: any[], type: number, newID: number) =
 
 // 上传富文本内容（作为HTML文件上传）
 export const uploadRichText = async (htmlContent: string, type: number, newID: number) => {
-    const urlNew = `https://swyacgknewea.sealoshzh.site/house/create/richtext/${newID}`
-    const urlModify = `https://swyacgknewea.sealoshzh.site/house/update/richtext/${type}`
+    const urlNew = `${API_BASE_URL}/house/create/richtext/${newID}`
+    const urlModify = `${API_BASE_URL}/house/update/richtext/${type}`
 
     try {
         const token = localStorage.getItem('token');

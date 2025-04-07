@@ -2,6 +2,7 @@ import type { FormProps } from 'antd';
 import { Button, Form, Input } from 'antd';
 import "./Login.css"
 import { useEffect } from 'react';
+import { API_BASE_URL } from '../../constants';
 
 
 type FieldType = {
@@ -12,7 +13,7 @@ type FieldType = {
 const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     try {
         if (values.phone === "admin") {
-            const response = await fetch("https://swyacgknewea.sealoshzh.site/auth/admin/login", {
+            const response = await fetch(`${API_BASE_URL}/auth/admin/login`, {
                 method: "POST",
                 body: JSON.stringify({ password: values.password })
             })
@@ -24,7 +25,7 @@ const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
                 window.location.href = "/admin"
             }
         } else {
-            const response = await fetch('https://swyacgknewea.sealoshzh.site/auth/login', {
+            const response = await fetch(`${API_BASE_URL}/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

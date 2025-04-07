@@ -17,6 +17,7 @@ import transformArrayToSearchJson from './utils/search'
 import AddressSearch from './component/House/AddressSearch/AddressSearch'
 import signal from "./assets/signal.jpg"
 import UserInfo from './component/House/UserInfo/UserInfo'
+import { API_BASE_URL } from './constants'
 
 
 
@@ -76,7 +77,7 @@ function App() {
         const token = localStorage.getItem('token');
         if (!token) throw new Error('未找到认证token');
 
-        const response = await fetch('https://swyacgknewea.sealoshzh.site/house/list', {
+        const response = await fetch(`${API_BASE_URL}/house/list`, {
           headers: {
             'Authorization': `Bearer ${token}`
           },
@@ -106,7 +107,7 @@ function App() {
       if (!token) throw new Error('未找到认证token');
 
       // console.log(token)
-      const response = await fetch('https://swyacgknewea.sealoshzh.site/house/select', {
+      const response = await fetch(`${API_BASE_URL}/house/select`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`  // 添加Authorization头
@@ -141,7 +142,7 @@ function App() {
       const token = localStorage.getItem('token');
       if (!token) throw new Error('未找到认证token');
 
-      const response = await fetch(`https://swyacgknewea.sealoshzh.site/house/search?address=${value}`, {
+      const response = await fetch(`${API_BASE_URL}/house/search?address=${value}`, {
         method: "GET",
         headers: {
           'Authorization': `Bearer ${token}`

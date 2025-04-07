@@ -16,7 +16,7 @@ interface User {
     username: string;
     phone: string;
 }
-
+import { API_BASE_URL } from '../../constants';
 const Admin: React.FC = () => {
     const [userList, setUserList] = useState<User[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -37,7 +37,7 @@ const Admin: React.FC = () => {
                 throw new Error('未找到认证token');
             }
 
-            const response = await fetch("https://swyacgknewea.sealoshzh.site/admin/list", {
+            const response = await fetch(`${API_BASE_URL}/admin/list`, {
                 method: "GET",
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -75,7 +75,7 @@ const Admin: React.FC = () => {
                 throw new Error('未找到要删除的用户');
             }
 
-            const response = await fetch(`https://swyacgknewea.sealoshzh.site/admin/delete/user/${userToDelete.phone}`, {
+            const response = await fetch(`${API_BASE_URL}/admin/delete/user/${userToDelete.phone}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },

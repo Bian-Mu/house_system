@@ -9,6 +9,7 @@ import UploadBox from './component/House/UploadBox/UploadBox';
 import signal from "./assets/signal.jpg"
 import DeleteButton from './component/House/DeleteButton/DeleteButton';
 import HtmlView from './component/House/HtmlView/HtmlView';
+import { API_BASE_URL } from './constants';
 // const imageList = [
 //     House, tgl, House
 // ]
@@ -55,7 +56,7 @@ const HouseDetails: React.FC = () => {
             const token = localStorage.getItem('token');
             if (!token) throw new Error('未找到认证token');
 
-            const response = await fetch(`https://swyacgknewea.sealoshzh.site/house/info/${HouseID}`, {
+            const response = await fetch(`${API_BASE_URL}//house/info/${HouseID}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`  // 添加Authorization头

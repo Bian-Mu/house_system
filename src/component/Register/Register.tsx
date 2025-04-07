@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import type { FormProps } from 'antd';
-
+import { API_BASE_URL } from '../../constants';
 
 interface RegisterFormValues {
     username: string;
@@ -23,7 +23,7 @@ const Register: React.FC = () => {
     const onFinish: FormProps<RegisterFormValues>['onFinish'] = async (values) => {
         try {
             setLoading(true);
-            const response = await fetch('https://swyacgknewea.sealoshzh.site/auth/register', {
+            const response = await fetch(`${API_BASE_URL}/auth/register`, {
                 method: "POST",
                 body: JSON.stringify(values)
             }

@@ -1,6 +1,7 @@
 import { Button, Modal, Form, Input, message } from "antd";
 import { useState } from "react";
 import "./UserInfo.css";
+import { API_BASE_URL } from "../../../constants";
 
 interface UserData {
     username: string;
@@ -39,7 +40,7 @@ const UserInfo = () => {
             const phone = localStorage.getItem("phone");
             if (!phone) throw new Error('未找到用户手机号');
 
-            const response = await fetch('https://swyacgknewea.sealoshzh.site/user/update', {
+            const response = await fetch(`${API_BASE_URL}/user/update`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',

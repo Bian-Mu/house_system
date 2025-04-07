@@ -1,5 +1,6 @@
 import { Button } from "antd"
 import React from "react"
+import { API_BASE_URL } from "../../../constants";
 
 interface DeleteButtonProps {
     type: number
@@ -10,7 +11,7 @@ const handleClick = async (type: number) => {
         const token = localStorage.getItem('token');
         if (!token) throw new Error('未找到认证token');
 
-        const response = await fetch(`https://swyacgknewea.sealoshzh.site/house/delete/${type}`, {
+        const response = await fetch(`${API_BASE_URL}//house/delete/${type}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`  // 添加Authorization头
