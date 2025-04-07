@@ -1,6 +1,7 @@
 import type { FormProps } from 'antd';
 import { Button, Form, Input } from 'antd';
 import "./Login.css"
+import { useEffect } from 'react';
 
 
 type FieldType = {
@@ -10,26 +11,40 @@ type FieldType = {
 
 const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     try {
-        const response = await fetch('https://swyacgknewea.sealoshzh.site/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(values),
-        });
-
-        // console.log('响应数据:', response.data); // 查看返回的数据结构
-
-
-        if (response.ok) {
-            const data = await response.json()
-            // console.log(data.result)
-            localStorage.setItem('phone', data.result.User.phone);
-            localStorage.setItem('token', data.result.token);
-            localStorage.setItem('username', data.result.User.username);
-            window.location.href = '/';
+        if (values.phone === "admin") {
+            const response = await fetch("https://m1.apifoxmock.com/m1/6122515-5814159-default/auth/admin/login", {
+                method: "POST",
+                body: JSON.stringify(values.password)
+            })
+            if (response.ok) {
+                const data = await response.json()
+                localStorage.setItem('phone', "admin");
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('username', "admin");
+                window.location.href = "/admin"
+            }
         } else {
-            alert('Login failed');
+            const response = await fetch('https://swyacgknewea.sealoshzh.site/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(values),
+            });
+
+            // console.log('响应数据:', response.data); // 查看返回的数据结构
+
+
+            if (response.ok) {
+                const data = await response.json()
+                // console.log(data.result)
+                localStorage.setItem('phone', data.result.User.phone);
+                localStorage.setItem('token', data.result.token);
+                localStorage.setItem('username', data.result.User.username);
+                window.location.href = '/';
+            } else {
+                alert('Login failed');
+            }
         }
     } catch (error) {
         console.error('Login Error:', error);
@@ -42,6 +57,9 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
 
 
 function Login() {
+    useEffect(() => {
+        document.title = '四川金信诺-用户登陆';
+    }, []);
     return (
         <div className='whole-login-page'>
 

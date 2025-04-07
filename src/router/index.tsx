@@ -4,11 +4,12 @@ import HouseDetails from "../HouseDetails";
 import Login from "../component/Login/Login";
 import Customer from "../component/Customer/Customer";
 import Register from "../component/Register/Register";
+import Admin from "../component/Admin/Admin";
 
 const router = createBrowserRouter([
     {
         path: "/admin",
-        element: null
+        element: localStorage.getItem("phone") == "admin" ? <Admin /> : <Navigate to="/" replace />
     },
     {
         path: "/login",
