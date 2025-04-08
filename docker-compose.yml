@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  house-system-frontend:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: hewo233/house-system-frontend:latest
+    ports:
+      - "80:80"
+    restart: unless-stopped
