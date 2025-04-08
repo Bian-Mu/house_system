@@ -1,19 +1,17 @@
-
-
 interface Result {
     basic: {
         address: {
             distinct: number;
             details: string;
         }
-        height: number;
+        height: number | string;
         price: number;
-        renovation: number;
-        specail: number;
-        subjectmatter: number;
+        renovation: number | string;
+        special: number | string;
+        subjectmatter: number | string;
         size: number;
-        room: number;
-        direction: number;
+        room: number | string;
+        direction: number | string;
         uploadTime: string;
     };
     images: string[];
@@ -84,19 +82,21 @@ const subjectMatterOptions = [
 
 
 export default function reverseValuesToLabels(result: Result): Result {
+    // console.log(result)
     const findLabel = (options: Array<{ value: string, label: string }>, value: number): string => {
+        // console.log(value)
         const option = options.find(opt => opt.value === value.toString());
         return option ? option.label : value.toString();
     };
 
-    const newResult = JSON.parse(JSON.stringify(result));
+    const newResult: Result = JSON.parse(JSON.stringify(result));
 
-    newResult.basic.height = findLabel(heightOptions, result.basic.height);
-    newResult.basic.renovation = findLabel(renovationOptions, result.basic.renovation);
-    newResult.basic.specail = findLabel(specialOptions, result.basic.specail);
-    newResult.basic.subjectmatter = findLabel(subjectMatterOptions, result.basic.subjectmatter);
-    newResult.basic.room = findLabel(roomOptions, result.basic.room);
-    newResult.basic.direction = findLabel(directionOptions, result.basic.direction);
+    newResult.basic.height = findLabel(heightOptions, result.basic.height as number);
+    newResult.basic.renovation = findLabel(renovationOptions, result.basic.renovation as number);
+    newResult.basic.special = findLabel(specialOptions, result.basic.special as number);
+    newResult.basic.subjectmatter = findLabel(subjectMatterOptions, result.basic.subjectmatter as number);
+    newResult.basic.room = findLabel(roomOptions, result.basic.room as number);
+    newResult.basic.direction = findLabel(directionOptions, result.basic.direction as number);
 
     return newResult;
 }

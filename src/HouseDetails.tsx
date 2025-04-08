@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PicStream from './component/SingleInfo/PicStream/PicStream';
 import "./HouseDetails.css"
-// import House from "./assets/image.png"
-// import tgl from "./assets/Login.png"
 import { Divider } from 'antd';
 import UploadBox from './component/House/UploadBox/UploadBox';
 
@@ -22,7 +20,7 @@ interface Result {
         height: number | string;
         price: number;
         renovation: number | string;
-        specail: number | string;
+        special: number | string;
         subjectmatter: number | string;
         size: number;
         room: number | string;
@@ -102,14 +100,23 @@ const HouseDetails: React.FC = () => {
                         </div>
                     </div>
                     <Divider />
+                    <p>基础信息</p>
                     <div id='house-basic'>
-                        <span className='basic-info-span'>楼层：{Data.basic.height}</span>
-                        <span className='basic-info-span'>户型：{Data.basic.room}</span>
-                        <span className='basic-info-span'>装修：{Data.basic.renovation}</span>
-                        <span className='basic-info-span'>面积：{Data.basic.size}</span>
-                        <span className='basic-info-span'>类型：{Data.basic.subjectmatter}</span>
-                        <span className='basic-info-span'>特色：{Data.basic.specail}</span>
+                        <span className='basic-info-span-title'>楼层：</span>
+                        <span className='basic-info-span'>{Data.basic.height}</span>
+                        <span className='basic-info-span-title'>户型：</span>
+                        <span className='basic-info-span'>{Data.basic.room}</span>
+                        <span className='basic-info-span-title'>类型：</span>
+                        <span className='basic-info-span'>{Data.basic.subjectmatter}</span>
+                        <span className='basic-info-span-title'>面积：</span>
+                        <span className='basic-info-span'>{Data.basic.size} 平方米</span>
+                        <span className='basic-info-span-title'>装修：</span>
+                        <span className='basic-info-span'>{Data.basic.renovation}</span>
+                        <span className='basic-info-span-title'>特色：</span>
+                        <span className='basic-info-span'>{Data.basic.special}</span>
                     </div>
+                    <Divider />
+                    <p>房屋详情</p>
                     <div id='house-richtext'>
                         <HtmlView url={Data.richText} />
                     </div>
