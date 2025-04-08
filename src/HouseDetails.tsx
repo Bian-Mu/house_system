@@ -100,7 +100,7 @@ const HouseDetails: React.FC = () => {
                         </div>
                     </div>
                     <Divider />
-                    <p>基础信息</p>
+                    <p className='head-info'>基础信息</p>
                     <div id='house-basic'>
                         <span className='basic-info-span-title'>楼层：</span>
                         <span className='basic-info-span'>{Data.basic.height}</span>
@@ -116,7 +116,7 @@ const HouseDetails: React.FC = () => {
                         <span className='basic-info-span'>{Data.basic.special}</span>
                     </div>
                     <Divider />
-                    <p>房屋详情</p>
+                    <p className='head-info'>房屋详情</p>
                     <div id='house-richtext'>
                         <HtmlView url={Data.richText} />
                     </div>

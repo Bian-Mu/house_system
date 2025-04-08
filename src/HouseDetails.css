@@ -1,5 +1,5 @@
 #house-details {
-    min-height: 900px;
+    min-height: auto;
     max-width: 900px;
     position: relative;
     left: 50%;
@@ -10,6 +10,7 @@
     margin: 10px;
     box-shadow: 24px -12px rgb(2, 168, 168);
 }
+
 
 #house-brief {
     display: grid;
@@ -73,7 +74,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.details-page p {
+.head-info {
     height: 30px;
     margin: 20px 0 10px 30px;
 }
@@ -88,6 +89,8 @@
     line-height: 50px;
     color: gray;
 }
+
+
 
 /* 房屋详情页面移动端适配 */
 @media (max-width: 768px) {
@@ -144,7 +147,7 @@
         grid-template-rows: 1fr 1fr;
     }
 
-    .details-page p {
+    .head-info {
         height: auto;
         margin: 10px 0 5px 15px;
     }
