@@ -2,6 +2,9 @@
 FROM node:22.12-alpine AS builder
 WORKDIR /app
 
+ENV HTTP_PROXY=http://localhost:7890
+ENV HTTPS_PROXY=http://localhost:7890
+
 RUN npm install -g npm@10.9.0
 
 RUN npm config set registry https://registry.npmmirror.com

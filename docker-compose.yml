@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: dockerfile
+      network: host
     image: hewo233/house-system-frontend:latest
     ports:
       - "80:80"
