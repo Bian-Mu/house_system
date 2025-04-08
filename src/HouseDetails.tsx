@@ -56,7 +56,7 @@ const HouseDetails: React.FC = () => {
             const token = localStorage.getItem('token');
             if (!token) throw new Error('未找到认证token');
 
-            const response = await fetch(`${API_BASE_URL}//house/info/${HouseID}`, {
+            const response = await fetch(`${API_BASE_URL}/house/info/${HouseID}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`  // 添加Authorization头
