@@ -88,3 +88,70 @@
     line-height: 50px;
     color: gray;
 }
+
+/* 房屋详情页面移动端适配 */
+@media (max-width: 768px) {
+    #house-details {
+        min-height: auto;
+        max-width: 95%;
+        top: 20px;
+        box-shadow: 12px -6px rgb(2, 168, 168);
+        padding: 5px;
+        margin: 5px;
+    }
+
+    #house-brief {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    #house-brief div h2 {
+        font-size: 24px;
+        margin-top: 30px;
+        height: auto;
+        padding-left: 10px;
+    }
+
+    #house-brief div h3 {
+        font-size: 18px;
+        margin: 30px 0 0 0;
+        padding-left: 20px;
+    }
+
+    #button-box {
+        grid-template-columns: 1fr;
+    }
+
+    #button-box div {
+        width: 80%;
+        padding-left: 10%;
+        margin-top: 5px;
+    }
+
+    #signal {
+        width: 100%;
+        padding: 5px 0;
+        grid-template-columns: 2fr 1fr;
+    }
+
+    #signal img {
+        width: 120px;
+    }
+
+    #house-basic {
+        height: auto;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .details-page p {
+        height: auto;
+        margin: 10px 0 5px 15px;
+    }
+
+    .basic-info-span,
+    .basic-info-span-title {
+        line-height: 30px;
+        font-size: 14px;
+    }
+}
