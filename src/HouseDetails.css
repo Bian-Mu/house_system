@@ -93,11 +93,11 @@
 @media (max-width: 768px) {
     #house-details {
         min-height: auto;
-        max-width: 95%;
-        top: 20px;
+        max-width: 85%;
+        top: 95px;
         box-shadow: 12px -6px rgb(2, 168, 168);
-        padding: 5px;
-        margin: 5px;
+        padding: 10px;
+        margin: 0px;
     }
 
     #house-brief {
@@ -109,13 +109,13 @@
         font-size: 24px;
         margin-top: 30px;
         height: auto;
-        padding-left: 10px;
+        text-align: center;
     }
 
     #house-brief div h3 {
         font-size: 18px;
         margin: 30px 0 0 0;
-        padding-left: 20px;
+        text-align: center;
     }
 
     #button-box {
@@ -135,7 +135,7 @@
     }
 
     #signal img {
-        width: 120px;
+        width: 240px;
     }
 
     #house-basic {

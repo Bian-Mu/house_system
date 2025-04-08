@@ -50,14 +50,14 @@
 
     .Login {
         position: relative;
-        top: auto;
+        top: 100px;
         right: auto;
         transform: none;
         width: 85%;
-        margin: 30px auto;
+        margin: auto;
         height: auto;
         min-height: 280px;
-        padding: 20px 0;
+        padding: 40px 0;
     }
 
     .Login p {
@@ -69,7 +69,7 @@
     }
 
     .login-input {
-        width: 90%;
+        width: 100%;
         max-width: 260px;
         padding: 12px;
         font-size: 16px;

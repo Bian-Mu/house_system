@@ -5,3 +5,13 @@
 #upload-box {
     margin-left: 650px;
 }
+
+@media (max-width: 768px) {
+    .sort-item {
+        margin-left: 0px;
+    }
+
+    #upload-box {
+        margin-left: 30px;
+    }
+}

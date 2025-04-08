@@ -4,3 +4,16 @@
     margin: 10px;
     border: 1px solid gray;
 }
+
+@media (max-width:768px) {
+    .PicStreamBox {
+        height: 90%;
+        width: 80%;
+        margin: 20px 0 0 40px;
+        border: 1px solid gray;
+    }
+
+    .PicStreamBox img {
+        height: 200px !important;
+    }
+}

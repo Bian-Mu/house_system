@@ -21,7 +21,8 @@
 
 @media (max-width: 768px) {
     .single-card {
-        width: 85%;
+        width: 95%;
+        height: 100%;
     }
 
     #house-cards {
@@ -30,6 +31,6 @@
 
     #page-convert {
         position: static;
-        transform: translate(10%, 0);
+        transform: translate(40%, 0);
     }
 }

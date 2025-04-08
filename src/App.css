@@ -67,10 +67,31 @@
 }
 
 
+.ant-divider {
+    margin: 8px 0 8px 0;
+}
+
 /* 手机端适配 */
 @media (max-width: 768px) {
+    #address-search {
+        width: 95%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        grid-template-columns: 8fr 2fr 2fr 0fr;
+    }
+
+
+    #address-search img {
+        width: 0px;
+    }
+
+    #jumpToCustomer {
+        margin: 5px 0 0 10px;
+        font-size: 14px;
+    }
+
     #all-select {
-        width: 85%;
+        width: 130%;
         height: auto;
         position: static;
         transform: none;
@@ -79,7 +100,7 @@
     }
 
     #house-show {
-        width: 85%;
+        width: 130%;
         height: auto;
         position: static;
         transform: none;
@@ -93,8 +114,4 @@
         width: 100%;
         margin-bottom: 10px;
     }
-}
-
-.ant-divider {
-    margin: 8px 0 8px 0;
 }
