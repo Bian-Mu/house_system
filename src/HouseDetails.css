@@ -66,3 +66,14 @@
     margin: 0;
     width: 200px;
 }
+
+#house-basic {
+    height: 300px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.basic-info-span {
+    text-align: center;
+    align-items: center;
+}

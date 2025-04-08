@@ -10,9 +10,7 @@ import signal from "./assets/signal.jpg"
 import DeleteButton from './component/House/DeleteButton/DeleteButton';
 import HtmlView from './component/House/HtmlView/HtmlView';
 import { API_BASE_URL } from './constants';
-// const imageList = [
-//     House, tgl, House
-// ]
+import reverseValuesToLabels from './utils/reverse';
 
 
 interface Result {
@@ -21,10 +19,14 @@ interface Result {
             distinct: number;
             details: string;
         }
+        height: number | string;
         price: number;
+        renovation: number | string;
+        specail: number | string;
+        subjectmatter: number | string;
         size: number;
-        room: number;
-        direction: number;
+        room: number | string;
+        direction: number | string;
         uploadTime: string;
     };
     images: string[];
@@ -65,9 +67,8 @@ const HouseDetails: React.FC = () => {
 
             const data = await response.json();
 
-            // if (data.success) {
-            setData(data.results);
-            // }
+            setData(reverseValuesToLabels(data.results));
+            console.log(Data)
         } catch (err) {
             console.error('请求失败:', err);
         } finally {
@@ -101,6 +102,14 @@ const HouseDetails: React.FC = () => {
                         </div>
                     </div>
                     <Divider />
+                    <div id='house-basic'>
+                        <span className='basic-info-span'>楼层：{Data.basic.height}</span>
+                        <span className='basic-info-span'>户型：{Data.basic.room}</span>
+                        <span className='basic-info-span'>装修：{Data.basic.renovation}</span>
+                        <span className='basic-info-span'>面积：{Data.basic.size}</span>
+                        <span className='basic-info-span'>类型：{Data.basic.subjectmatter}</span>
+                        <span className='basic-info-span'>特色：{Data.basic.specail}</span>
+                    </div>
                     <div id='house-richtext'>
                         <HtmlView url={Data.richText} />
                     </div>
