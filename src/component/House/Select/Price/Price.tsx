@@ -6,7 +6,7 @@ import "./Price.css"
 
 const CheckboxGroup = Checkbox.Group;
 
-const plainOptions = ['[0,100)', '[100,300)', '[300,500)', '[500,1000)', '[1000,+)'];
+const plainOptions = ['100以内', '100到300', '300到500', '500到1000', '1000以上'];
 
 interface PriceProps {
     setReturnValue: Function

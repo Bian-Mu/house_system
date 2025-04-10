@@ -6,7 +6,7 @@ import "./Size.css"
 
 const CheckboxGroup = Checkbox.Group;
 
-const plainOptions = ['[0,50)', '[50,100)', '[100,150)', '[150,200)', '[200,+)'];
+const plainOptions = ['50以内', '50到100', '100到150', '150到200', '200以上'];
 
 interface SizeProps {
     setReturnValue: Function

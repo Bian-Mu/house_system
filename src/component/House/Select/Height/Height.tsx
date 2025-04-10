@@ -6,7 +6,7 @@ import "./Height.css"
 
 const CheckboxGroup = Checkbox.Group;
 
-const plainOptions = ['低楼层', '中楼层', '高楼层'];
+const plainOptions = ['低（1-6层）', '中（7-15层）', '高（15层以上）'];
 
 interface HeightProps {
     setReturnValue: Function

@@ -67,11 +67,11 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
     ];
 
     // 楼层
-    const heightOptions = [
-        { value: "1", label: "低楼层" },
-        { value: "2", label: "中楼层" },
-        { value: "3", label: "高楼层" },
-    ];
+    // const heightOptions = [
+    //     { value: "1", label: "低楼层" },
+    //     { value: "2", label: "中楼层" },
+    //     { value: "3", label: "高楼层" },
+    // ];
 
     // 装修程度
     const renovationOptions = [
@@ -108,15 +108,22 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
         try {
 
             const initialvalues = await form.validateFields(); // 校验表单
-            const values = Object.fromEntries(
+            var values = Object.fromEntries(
                 Object.entries(initialvalues).map(([key, value]) => {
+                    if (key === 'address' && value.distinct && Array.isArray(value.distinct)) {
+                        // 处理address.distinct，取数组最后一个值
+                        return [key, {
+                            ...value,
+                            distinct: value.distinct[value.distinct.length - 1]
+                        }];
+                    }
                     if (typeof value === 'string' && /^-?\d+(\.\d+)?$/.test(value)) {
                         return [key, parseFloat(value)];
                     }
                     return [key, value];
                 })
             );
-            console.log("表单数据:", values);
+            // console.log("表单数据:", values);
             // console.log("上传的文件:", fileList);
             // console.log(code);
 
@@ -127,7 +134,7 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
             if (IfNewID == -1) {
                 messageApi.open({
                     type: "error",
-                    content: "上传重复"
+                    content: "上传有误或者重复"
                 })
             } else {
                 // 2. 然后上传图片
@@ -194,7 +201,7 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item
-                                normalize={(value) => value ? value[2] : null}
+                                // normalize={(value) => value ? value[2] : null}
                                 name={['address', 'distinct']}
                                 label="地区编码"
                                 rules={[{ required: true, message: "请输入地址！" }]}
@@ -296,13 +303,7 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
                                 rules={[{ required: true, message: "请选择楼层！" }]}
                                 className="four-col-form-item"
                             >
-                                <Select placeholder="请选择楼层">
-                                    {heightOptions.map((option) => (
-                                        <Option key={option.value} value={option.value}>
-                                            {option.label}
-                                        </Option>
-                                    ))}
-                                </Select>
+                                <Input type="number" placeholder="请输入房屋楼层" />
                             </Form.Item>
                         </Col>
 
