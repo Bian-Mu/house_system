@@ -17,7 +17,7 @@ export const uploadJsonData = async (jsonData: any, type: number) => {
         });
 
         if (!response.ok) {
-            throw new Error('JSON数据上传失败');
+            return -1
         }
         console.log('JSON数据上传成功');
         const data = await response.json();
@@ -28,8 +28,7 @@ export const uploadJsonData = async (jsonData: any, type: number) => {
         }
 
     } catch (error) {
-        console.error('上传JSON数据时出错:', error);
-        throw error;
+        return error
     }
 };
 

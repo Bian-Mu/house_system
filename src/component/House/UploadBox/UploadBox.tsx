@@ -30,7 +30,7 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
     const [fileList, setFileList] = useState<UploadFile[]>([]);
     const [code, setCode] = useState("");
-
+    const [messageApi, contextHolder] = message.useMessage();
     //特色
     const specialOptions = [
         { value: "1", label: "可贷款" },
@@ -120,18 +120,24 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
             // console.log("上传的文件:", fileList);
             // console.log(code);
 
-            message.loading({ content: '正在上传数据...', key: 'uploadStatus' });
 
             // 1. 首先上传JSON数据
-            const IfNewID = await uploadJsonData(values, type);
+            const IfNewID: number = await uploadJsonData(values, type);
 
-            // 2. 然后上传图片
-            await uploadImages(fileList, type, IfNewID);
+            if (IfNewID == -1) {
+                messageApi.open({
+                    type: "error",
+                    content: "上传重复"
+                })
+            } else {
+                // 2. 然后上传图片
+                await uploadImages(fileList, type, IfNewID as number);
 
-            // 3. 最后上传富文本内容
-            await uploadRichText(code, type, IfNewID);
+                // 3. 最后上传富文本内容
+                await uploadRichText(code, type, IfNewID as number);
+                messageApi.success("上传成功")
+            }
 
-            message.success({ content: "所有数据上传成功！", key: 'uploadStatus' });
             handleCancel(); // 关闭模态框
         } catch (error) {
             console.error("上传过程中出错:", error);
@@ -169,6 +175,7 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
 
     return (
         <>
+            {contextHolder}
             <Button type="primary" onClick={showModal}>
                 {name}房源
             </Button>
