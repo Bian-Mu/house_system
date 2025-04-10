@@ -20,8 +20,12 @@ const router = createBrowserRouter([
         element: <Register />
     },
     {
+        path: "/admin/customer",
+        element: <Customer level={1} />
+    },
+    {
         path: "/customer",
-        element: <Customer />
+        element: <Customer level={0} />
     },
     {
         path: "/",

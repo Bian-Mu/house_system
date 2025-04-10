@@ -22,7 +22,7 @@ const Admin: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [deleteLoading, setDeleteLoading] = useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const pageSize = 20;
+    const pageSize = 10;
 
     useEffect(() => {
         document.title = "管理员页面";
@@ -140,10 +140,17 @@ const Admin: React.FC = () => {
 
     return (
         <>
-            <div id='invite-box'>
-                <InviteBox />
-            </div>
+            <Divider />
+            <Button onClick={() => { window.open(`/admin/customer`, '_blank') }} id='jumpToCustomer'>
+                查看客户表
+            </Button>
+
             <div style={{ padding: 24 }}>
+                <span>员工表</span>
+                <div id='invite-box'>
+                    <InviteBox />
+                </div>
+                <Divider />
                 <Spin spinning={loading}>
                     <Table
                         bordered

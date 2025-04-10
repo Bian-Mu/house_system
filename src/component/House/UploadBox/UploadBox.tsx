@@ -41,14 +41,19 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
     ];
 
 
-    // 户型
+
     const roomOptions = [
-        { value: "1", label: "一室" },
-        { value: "2", label: "二室" },
-        { value: "3", label: "三室" },
-        { value: "4", label: "四室" },
-        { value: "5", label: "四室以上" },
-    ];
+        { value: "1", label: "一室一厅" },
+        { value: "2", label: "一室一厅一卫" },
+        { value: "3", label: "两室一厅一卫" },
+        { value: "4", label: "两室两厅一卫" },
+        { value: "5", label: "两室两厅两卫" },
+        { value: "6", label: "三室一厅一卫" },
+        { value: "7", label: "三室一厅两卫" },
+        { value: "8", label: "三室两厅两卫" },
+        { value: "9", label: "四室两厅一卫" },
+        { value: "10", label: "四室两厅两卫" },
+        { value: "11", label: "其他" }]
 
     // 房屋朝向
     const directionOptions = [

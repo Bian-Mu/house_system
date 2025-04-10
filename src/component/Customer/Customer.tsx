@@ -85,7 +85,11 @@ const EditableCell: React.FC<{
         );
     };
 
-const Customer: React.FC = () => {
+interface CustomerProps {
+    level: 0 | 1
+}
+
+const Customer: React.FC<CustomerProps> = ({ level }) => {
     const [form] = Form.useForm<DataType>();
     const [data, setData] = useState<DataType[]>([]);
     const [editingKey, setEditingKey] = useState<React.Key>('');
@@ -106,7 +110,7 @@ const Customer: React.FC = () => {
                 throw new Error('未找到认证token');
             }
 
-            const response = await fetch(`${API_BASE_URL}/customer/list`, {
+            const response = await fetch(level ? `${API_BASE_URL}/admin/customer/list` : `${API_BASE_URL}/customer/list`, {
                 method: "GET",
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -182,7 +186,7 @@ const Customer: React.FC = () => {
                         // 更新数据
                         const updatedItem = { ...item, ...row };
                         const { key, ...dataToSend } = updatedItem;
-                        const response = await fetch(`${API_BASE_URL}/customer/update/${item.customer_id}`, {
+                        const response = await fetch(`${API_BASE_URL}/admin/customer/update/${item.customer_id}`, {
                             method: "PUT",
                             headers: {
                                 'Authorization': `Bearer ${token}`
@@ -219,7 +223,7 @@ const Customer: React.FC = () => {
                     if (!token) {
                         throw new Error('未找到认证token');
                     }
-                    const response = await fetch(`${API_BASE_URL}/customer/delete/${item.customer_id}`, {
+                    const response = await fetch(`${API_BASE_URL}/admin/customer/delete/${item.customer_id}`, {
                         method: "DELETE",
                         headers: {
                             'Authorization': `Bearer ${token}`
@@ -302,7 +306,7 @@ const Customer: React.FC = () => {
             editable: true,
             width: '25%',
         },
-        {
+        level ? {
             title: '操作',
             dataIndex: 'operation',
             width: '10%',
@@ -330,7 +334,7 @@ const Customer: React.FC = () => {
                     </Space>
                 );
             },
-        },
+        } : {}
     ];
 
     const mergedColumns = columns.map((col) => {
@@ -359,14 +363,14 @@ const Customer: React.FC = () => {
 
     return (
         <div style={{ padding: 24 }}>
-            <Button
+            {(!level) ? <Button
                 onClick={handleAdd}
                 type="primary"
                 style={{ marginBottom: 16 }}
                 disabled={editingKey !== ''}
             >
                 新增客户
-            </Button>
+            </Button> : null}
             <Form form={form} component={false}>
                 <Table
                     components={{

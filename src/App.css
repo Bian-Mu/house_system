@@ -23,7 +23,7 @@
 
 #all-select {
     width: 1200px;
-    height: 455px;
+    height: 495px;
     position: absolute;
     top: 75px;
     left: 50%;
@@ -50,7 +50,7 @@
 #house-show {
     width: 1200px;
     height: 1200px;
-    top: 555px;
+    top: 595px;
     left: 50%;
     transform: translate(-50%, 0);
     position: absolute;

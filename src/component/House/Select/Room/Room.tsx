@@ -6,7 +6,19 @@ import "./Room.css"
 
 const CheckboxGroup = Checkbox.Group;
 
-const plainOptions = ['一室', '二室', '三室', '四室', '四室以上'];
+const plainOptions = [
+    "一室一厅无卫",
+    "一室一厅一卫",
+    "两室一厅一卫",
+    "两室两厅一卫",
+    "两室两厅两卫",
+    "三室一厅一卫",
+    "三室一厅两卫",
+    "三室两厅两卫",
+    "四室两厅一卫",
+    "四室两厅两卫",
+    "其他"
+];
 
 interface RoomProps {
     setReturnValue: Function
@@ -35,11 +47,11 @@ const Room: React.FC<RoomProps> = ({ setReturnValue }) => {
 
     return (
         <div id="Room-select">
-            <span className='select-type'>户型</span>
-            <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
-                不限
+            <span className='select-type room-select-type'>户型</span>
+            <Checkbox className='room-all-select' indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
+                <p>不限</p>
             </Checkbox>
-            <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChange} />
+            <CheckboxGroup className='room-too-much' options={plainOptions} value={checkedList} onChange={onChange} />
         </div>
     );
 };
