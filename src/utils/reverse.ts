@@ -4,7 +4,8 @@ interface Result {
             distinct: number;
             details: string;
         }
-        height: number | string;
+        height: number;
+        totalHeight: number;
         price: number;
         renovation: number | string;
         special: number | string;
@@ -21,11 +22,11 @@ interface Result {
 
 //特色
 const specialOptions = [
-    { value: "1", label: "可贷款" },
-    { value: "2", label: "全程服务" },
-    { value: "3", label: "特价房" },
-    { value: "4", label: "地铁房" },
-    { value: "5", label: "其他（无以上特色）" },
+    { value: "1", label: "一拍" },
+    { value: "2", label: "二拍" },
+    { value: "3", label: "变卖" },
+    { value: "4", label: "特价" },
+    { value: "5", label: "其他" },
 ];
 
 
@@ -55,11 +56,11 @@ const directionOptions = [
 ];
 
 // 楼层
-const heightOptions = [
-    { value: "1", label: "低楼层" },
-    { value: "2", label: "中楼层" },
-    { value: "3", label: "高楼层" },
-];
+// const heightOptions = [
+//     { value: "1", label: "低楼层" },
+//     { value: "2", label: "中楼层" },
+//     { value: "3", label: "高楼层" },
+// ];
 
 // 装修程度
 const renovationOptions = [
@@ -91,7 +92,7 @@ export default function reverseValuesToLabels(result: Result): Result {
 
     const newResult: Result = JSON.parse(JSON.stringify(result));
 
-    newResult.basic.height = findLabel(heightOptions, result.basic.height as number);
+    // newResult.basic.height = findLabel(heightOptions, result.basic.height as number);
     newResult.basic.renovation = findLabel(renovationOptions, result.basic.renovation as number);
     newResult.basic.special = findLabel(specialOptions, result.basic.special as number);
     newResult.basic.subjectmatter = findLabel(subjectMatterOptions, result.basic.subjectmatter as number);

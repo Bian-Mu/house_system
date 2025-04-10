@@ -33,10 +33,10 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
     const [messageApi, contextHolder] = message.useMessage();
     //特色
     const specialOptions = [
-        { value: "1", label: "可贷款" },
-        { value: "2", label: "全程服务" },
-        { value: "3", label: "特价房" },
-        { value: "4", label: "地铁房" },
+        { value: "1", label: "一拍" },
+        { value: "2", label: "二拍" },
+        { value: "3", label: "变卖" },
+        { value: "4", label: "特价" },
         { value: "5", label: "其他（无以上特色）" },
     ];
 
@@ -300,13 +300,22 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
                             <Form.Item
                                 name="height"
                                 label="楼层"
-                                rules={[{ required: true, message: "请选择楼层！" }]}
+                                rules={[{ required: true, message: "请输入楼层！" }]}
                                 className="four-col-form-item"
                             >
-                                <Input type="number" placeholder="请输入房屋楼层" />
+                                <Input type="number" placeholder="请输入楼层" />
                             </Form.Item>
                         </Col>
-
+                        <Col span={6}>
+                            <Form.Item
+                                name="totalHeight"
+                                label="总楼层"
+                                rules={[{ required: true, message: "请输入总楼层！" }]}
+                                className="four-col-form-item"
+                            >
+                                <Input type="number" placeholder="请输入总楼层" />
+                            </Form.Item>
+                        </Col>
                         <Col span={6}>
                             <Form.Item
                                 name="renovation"
@@ -324,6 +333,9 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
                             </Form.Item>
                         </Col>
 
+                    </Row>
+
+                    <Row gutter={16}>
                         <Col span={6}>
                             <Form.Item
                                 name="subjectmatter"
@@ -340,10 +352,7 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
                                 </Select>
                             </Form.Item>
                         </Col>
-
-
                     </Row>
-
 
                     <Form.Item label="相关图片（最多9张）">
                         <Upload

@@ -17,7 +17,8 @@ interface Result {
             distinct: number;
             details: string;
         }
-        height: number | string;
+        height: number;
+        totalHeight: number;
         price: number;
         renovation: number | string;
         special: number | string;
@@ -102,8 +103,8 @@ const HouseDetails: React.FC = () => {
                     <Divider />
                     <p className='head-info'>基础信息</p>
                     <div id='house-basic'>
-                        <span className='basic-info-span-title'>楼层：</span>
-                        <span className='basic-info-span'>{Data.basic.height}</span>
+                        <span className='basic-info-span-title'>楼层/总楼层</span>
+                        <span className='basic-info-span'>{Data.basic.height}/{Data.basic.totalHeight}</span>
                         <span className='basic-info-span-title'>户型：</span>
                         <span className='basic-info-span'>{Data.basic.room}</span>
                         <span className='basic-info-span-title'>类型：</span>

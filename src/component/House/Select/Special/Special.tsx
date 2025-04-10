@@ -6,7 +6,7 @@ import "./Special.css"
 
 const CheckboxGroup = Checkbox.Group;
 
-const plainOptions = ['可贷款', '全程服务', '特价房', '地铁房', '其他'];
+const plainOptions = ['一拍', '二拍', '变卖', '特价', '其他'];
 
 interface SpecialProps {
     setReturnValue: Function
