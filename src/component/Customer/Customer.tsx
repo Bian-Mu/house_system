@@ -305,8 +305,7 @@ const Customer: React.FC<CustomerProps> = ({ level }) => {
             key: 'other',
             editable: true,
             width: '25%',
-        },
-        level ? {
+        }, {
             title: '操作',
             dataIndex: 'operation',
             width: '10%',
@@ -321,7 +320,7 @@ const Customer: React.FC<CustomerProps> = ({ level }) => {
                             取消
                         </Button>
                     </Space>
-                ) : (
+                ) : level ? (
                     <Space>
                         <Button type="link" disabled={editingKey !== ''} onClick={() => edit(record)}>
                             编辑
@@ -332,9 +331,9 @@ const Customer: React.FC<CustomerProps> = ({ level }) => {
                             </Button>
                         </Popconfirm>
                     </Space>
-                );
+                ) : (<></>);
             },
-        } : {}
+        }
     ];
 
     const mergedColumns = columns.map((col) => {
