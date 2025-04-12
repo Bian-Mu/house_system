@@ -139,20 +139,35 @@ const UploadBox: React.FC<UploadBoxProps> = ({ name, type }) => {
             if (IfNewID == -1) {
                 messageApi.open({
                     type: "error",
-                    content: "上传有误或者重复"
+                    content: "基础信息上传有误或者重复"
                 })
+                handleCancel();
             } else {
                 // 2. 然后上传图片
-                await uploadImages(fileList, type, IfNewID as number);
-
+                const test = await uploadImages(fileList, type, IfNewID as number);
                 // 3. 最后上传富文本内容
-                await uploadRichText(code, type, IfNewID as number);
-                messageApi.success("上传成功")
+                const test2 = await uploadRichText(code, type, IfNewID as number);
+
+                if (test == -1) {
+                    messageApi.open({
+                        type: "error",
+                        content: "图片上传有误或者重复"
+                    })
+                    handleCancel();
+                } else if (test2 == -1) {
+                    messageApi.open({
+                        type: "error",
+                        content: "富文本上传有误或者重复"
+                    })
+                    handleCancel();
+                } else {
+                    messageApi.success("上传成功");
+                    handleCancel(); // 关闭模态框
+                }
             }
 
-            handleCancel(); // 关闭模态框
         } catch (error) {
-            console.error("上传过程中出错:", error);
+            // console.error("上传过程中出错:", error);
             message.error({ content: `上传失败: ${error}`, key: 'uploadStatus' });
         }
     };

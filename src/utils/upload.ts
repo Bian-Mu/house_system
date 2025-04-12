@@ -55,10 +55,10 @@ export const uploadImages = async (images: any[], type: number, newID: number) =
         });
 
         if (!response.ok) {
-            throw new Error('图片上传失败');
+            return -1
         }
-
         console.log('图片上传成功');
+        return 0;
     } catch (error) {
         console.error('上传图片时出错:', error);
         throw error;
@@ -90,10 +90,11 @@ export const uploadRichText = async (htmlContent: string, type: number, newID: n
         });
 
         if (!response.ok) {
-            throw new Error('富文本内容上传失败');
+            return -1
         }
 
         console.log('富文本内容上传成功');
+        return 0;
     } catch (error) {
         console.error('上传富文本内容时出错:', error);
         throw error;
