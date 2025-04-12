@@ -167,12 +167,12 @@ function App() {
 
       <div id="address-search">
         <AddressSearch onEnter={onEnter} />
-
+        <img src={signal} />
         <Button onClick={() => { window.open(`/customer`, '_blank') }} id='jumpToCustomer'>
           查看客户
         </Button>
         <UserInfo />
-        <img src={signal} />
+
       </div>
       <div id="all-select">
 
@@ -207,6 +207,9 @@ function App() {
           <Divider />
         </div>
         {loading ? <div>Loading...</div> : <HouseList list={list} sort={sort} />}
+      </div>
+      <div id='house-blank'>
+
       </div>
     </div>
   )

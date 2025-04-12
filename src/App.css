@@ -1,31 +1,31 @@
 #address-search {
     position: fixed;
     top: 0px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 5px;
+    padding-bottom: 10px;
     left: 50%;
     width: 1280px;
     background-color: white;
     z-index: 1;
     transform: translate(-50%, 0);
     display: grid;
-    grid-template-columns: 11fr 1fr 1fr 2fr;
+    grid-template-columns: 4fr 3.5fr 1fr 1fr;
 }
 
 #address-search img {
     margin: 0;
-    width: 160px;
+    width: 240px;
 }
 
 #jumpToCustomer {
-    margin: 5px 0 0 20px;
+    margin: 15px 0 0 20px;
 }
 
 #all-select {
     width: 1200px;
     height: 495px;
     position: absolute;
-    top: 75px;
+    top: 85px;
     left: 50%;
     transform: translate(-50%, 0);
     border: 1px solid rgb(213, 213, 213);
@@ -49,7 +49,7 @@
 
 #house-show {
     width: 1200px;
-    height: 1200px;
+    height: 1180px;
     top: 595px;
     left: 50%;
     transform: translate(-50%, 0);
@@ -58,6 +58,12 @@
     border-radius: 10px;
 }
 
+#house-blank {
+    position: absolute;
+    top: 1720px;
+    height: 100px;
+    width: 100%;
+}
 
 .select-type {
     display: inline-block;

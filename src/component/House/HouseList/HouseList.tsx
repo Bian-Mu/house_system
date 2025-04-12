@@ -29,7 +29,7 @@ const HouseCard: React.FC<HouseCardProps> = ({ H }) => {
             className='single-card'
             cover={<img alt="example" src={H.cover} style={{ "height": "220px" }} />}
         >
-            <Meta title={H.address} description={`实际面积：${H.size}平方米　　　　价格：${H.price}万元`} />
+            <Meta title={H.address} description={`实际面积：${H.size}平方米　　　价格：${H.price}万元`} />
         </Card>
     )
 }
@@ -85,18 +85,8 @@ const HouseList: React.FC<HouseListProps> = ({ list, sort }) => {
     if (!list || list.length === 0) {
         return (
             <div>
-                <div id="house-cards">
+                <div id="no-house-cards">
                     暂无对应查询房源
-                </div>
-                <Divider />
-                <div id='page-convert'>
-                    <Pagination
-                        current={currentPage}
-                        total={totalHouses}
-                        pageSize={housesPerPage}
-                        onChange={handlePageChange}
-                        showSizeChanger={false}
-                    />
                 </div>
             </div>
         );

@@ -14,7 +14,7 @@ const AddressSearch: React.FC<AddressSearchProps> = ({ onEnter }) => {
 
 
     return (
-        <Space direction="vertical" size="large">
+        <Space direction="vertical" size="large" style={{ marginTop: 15 }}>
             <Space.Compact size="large">
                 <Input addonBefore={<SearchOutlined />} placeholder="按地址查询" onPressEnter={handlePressEnter} />
             </Space.Compact>
