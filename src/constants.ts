@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'https://swyacgknewea.sealoshzh.site';
+export const API_BASE_URL = 'https://sbstqbxnodet.sealosbja.site';
